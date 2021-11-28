@@ -6,7 +6,7 @@ function Home() {
     return (
         <div>
             {/* This is the Home page */}
-            <Navbar/>
+            {/* <Navbar/> */}
             <div className="Container">
               How do you feel today?
                 <br/>

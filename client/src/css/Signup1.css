@@ -94,11 +94,12 @@ input {
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 	position: relative;
 	overflow: hidden;
+	/* display: inline-flex;
+	flex-wrap: wrap; */
 	width: 768px;
 	max-width: 100%;
 	min-height: 480px;
 }
-
 .form-container {
 	position: absolute;
 	top: 0;
@@ -111,7 +112,14 @@ input {
 	width: 50%;
 	z-index: 2;
 }
-
+/* .flex-direction {
+	flex-direction: row;
+}
+@media screen and (max-width: 500px) {
+	.flex-direction {
+		flex-direction: column;
+	}
+} */
 .container.right-panel-active .sign-in-container {
 	transform: translateX(100%);
 }
