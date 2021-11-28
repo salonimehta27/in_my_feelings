@@ -1,19 +1,24 @@
 .App {
-	height: 100vh;
+	height: 120vh;
 	display: flex;
 	color: white;
+	overflow: hidden;
+	background-color: #8bc6ec;
+	background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 53%);
 }
 
 .appAside {
 	width: 50%;
-	background-color: #6b5b95;
 }
-
+/* this was at width 50%  */
 .appForm {
 	width: 50%;
-	background-color: #12130f;
-	padding: 25px 40px;
+	height: 100%;
+	padding: 50px;
+	border: 5px solid #355c7d;
 	overflow: auto;
+	margin: auto;
+	background-color: #e2ebf0;
 }
 
 .pageSwitcher {
@@ -23,7 +28,7 @@
 }
 
 .pageSwitcherItem {
-	background-color: #40434e;
+	background-color: #355c70;
 	color: #9da6b1;
 	padding: 10px 25px;
 	cursor: pointer;
@@ -35,7 +40,7 @@
 }
 
 .pageSwitcherItem-active {
-	background-color: #6b5b95;
+	background-color: #355c70;
 	color: white;
 }
 
@@ -53,13 +58,13 @@
 }
 
 .formTitle {
-	color: #707c8b;
+	color: #f8b195;
 	font-weight: 300;
 	margin-bottom: 50px;
 }
 
 .formTitleLink {
-	color: #707c8b;
+	color: #f8b195;
 	text-decoration: none;
 	display: inline-block;
 	font-size: 1.7em;
@@ -81,16 +86,16 @@
 }
 
 .formFieldLabel {
-	display: block;
+	display: flex;
 	text-transform: uppercase;
 	font-size: 0.9em;
-	color: white;
+	color: #355c7d;
 }
 .formFieldInput {
 	width: 85%;
 	background-color: transparent;
 	border: none;
-	color: white;
+	color: #355c7d;
 	outline: none;
 	border-bottom: 1px solid #445366;
 	font-size: 1em;
@@ -100,7 +105,7 @@
 }
 
 .formFieldInput::placeholder {
-	color: #616e7f;
+	color: #355c7d;
 }
 
 .formFieldButton {
@@ -133,7 +138,7 @@
 }
 
 .formFieldTermsLink {
-	color: white;
+	color: #355c7d;
 	border-bottom: 1px solid #6b5b95;
 	text-decoration: none;
 	display: inline-block;

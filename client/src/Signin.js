@@ -1,6 +1,9 @@
 import React,{useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link,NavLink} from 'react-router-dom'
 import './css/Signin.css'
+import {MdPassword} from 'react-icons/md'
+import {BsPersonLinesFill} from 'react-icons/bs'
+import PageSwitcher from './PageSwitcher'
 
 function Signin() {
 const[username,setUsername]=useState("")
@@ -21,11 +24,14 @@ const[password,setPassword]=useState("")
     }
 
     return (
+        <div className="appForm">
+                
+            <PageSwitcher/>
       <div className="formCenter">
         <form className="formFields" onSubmit={(e)=>handleSubmit(e)}>
           <div className="formField">
             <label className="formFieldLabel" htmlFor="username">
-              Username
+            <BsPersonLinesFill/>
             </label>
             <input
               type="text"
@@ -40,7 +46,7 @@ const[password,setPassword]=useState("")
 
           <div className="formField">
             <label className="formFieldLabel" htmlFor="password">
-              Password
+            <MdPassword/>
             </label>
             <input
               type="password"
@@ -61,7 +67,8 @@ const[password,setPassword]=useState("")
           </div>
         </form>
       </div>
-  
+      </div>
+        
     )
 }
 

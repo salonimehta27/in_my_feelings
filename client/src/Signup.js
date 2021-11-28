@@ -1,5 +1,10 @@
 import React,{useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link,NavLink} from 'react-router-dom'
+import {MdPassword} from 'react-icons/md'
+import {BsPersonFill,BsPersonLinesFill} from 'react-icons/bs'
+import PageSwitcher from './PageSwitcher'
+
+
 function Signup() {
 const[signupForm,setSignupForm]=useState({
     name:"",
@@ -21,11 +26,15 @@ const[signupForm,setSignupForm]=useState({
         e.preventDefault();
       }
         return (
-          <div className="formCenter">
+
+            <div className="appForm">
+    
+            <PageSwitcher/>
+            <div className="formCenter">
             <form onSubmit={(e)=>handleSubmit(e)} className="formFields">
               <div className="formField">
                 <label className="formFieldLabel" htmlFor="name">
-                  Full Name
+                <BsPersonFill/>
                 </label>
                 <input
                   type="text"
@@ -39,7 +48,7 @@ const[signupForm,setSignupForm]=useState({
               </div>
               <div className="formField">
                 <label className="formFieldLabel" htmlFor="username">
-                  Username
+                <BsPersonLinesFill/>
                 </label>
                 <input
                   type="text"
@@ -53,7 +62,7 @@ const[signupForm,setSignupForm]=useState({
               </div>
               <div className="formField">
                 <label className="formFieldLabel" htmlFor="password">
-                  Password
+                <MdPassword/>
                 </label>
                 <input
                   type="password"
@@ -67,7 +76,7 @@ const[signupForm,setSignupForm]=useState({
               </div>
               <div className="formField">
                 <label className="formFieldLabel" htmlFor="password">
-                  Password
+                <MdPassword/>
                 </label>
                 <input
                   type="password"
@@ -90,9 +99,9 @@ const[signupForm,setSignupForm]=useState({
                     onChange={(e)=>handleChange(e)}
                   />{" "}
                   I agree all statements in{" "}
-                  <a href="null" className="formFieldTermsLink">
+                  <Link exact to="/disclaimer" className="formFieldTermsLink">
                     terms of service
-                  </a>
+                  </Link>
                 </label>
               </div>
     
@@ -103,6 +112,7 @@ const[signupForm,setSignupForm]=useState({
                 </Link>
               </div>
             </form>
+          </div>
           </div>
         );
    

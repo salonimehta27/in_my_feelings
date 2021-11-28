@@ -1,0 +1,47 @@
+This was to show sign in or signup option again which was already there
+
+{/* <div className="formTitle">
+              <NavLink
+                exact to="/signin"
+                activeClassName="formTitleLink-active"
+                className="formTitleLink"
+              >
+                Sign In
+              </NavLink>{" "}
+              or{" "}
+              <NavLink
+                exact
+                to="/signup"
+                activeClassName="formTitleLink-active"
+                className="formTitleLink"
+              >
+                Sign Up
+              </NavLink>
+            </div> */}
+
+
+This design was in app component as well for the bootstrap template
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+{/* <div className="App">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div className="container">
+        
+          <Link className="navbar-brand" to={"/"}>Home</Link>
+          
+          <Link className="navbar-brand" to={"/signup"}>Sign up</Link>
+          
+       
+          <Link className="navbar-brand" to={"/login"}>Sign in</Link>
+        
+    
+        </div>
+      </nav>
+    <div className="outer">
+    <div className="inner"> */}
+
+# removed the labels from the signup fields
+    <label className="formFieldLabel" htmlFor="username">
+              Username
+            </label>
+
+             {/* <div className="appAside" /> */}
