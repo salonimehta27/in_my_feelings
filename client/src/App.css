@@ -1,38 +1,70 @@
 .App {
-  text-align: center;
+	text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+	height: 40vmin;
+	pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+	}
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+	background-color: #282c34;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
 }
 
 .App-link {
-  color: #61dafb;
+	color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+.container {
+	background-color: #ffdde1;
+	border-radius: 10px;
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+	position: absolute sticky;
+	/*overflow: hidden; */
+	/* display: inline-flex;
+	flex-wrap: wrap; */
+	width: 60%;
+	height: 50vh;
+	padding: 50px;
+	margin-left: 15%;
+	/* border: 5px solid #355c7d; */
+	overflow: hidden;
+	/* margin: auto; */
+	margin-top: 50px;
+	max-width: 100%;
+	min-height: 480px;
+}
+.app-list {
+	list-style: none;
+	display: flex;
+	justify-content: space-around;
+	flex-direction: row;
+	padding: 5px;
+	margin-top: 200px;
+}
+.app-items {
+	text-decoration: none;
+	font-family: "Swanky and Moo Moo", cursive;
+	font-size: 23px;
 }

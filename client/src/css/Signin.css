@@ -1,5 +1,5 @@
 .App {
-	height: 120vh;
+	height: 140vh;
 	display: flex;
 	color: white;
 	overflow: hidden;
@@ -15,10 +15,12 @@
 	width: 50%;
 	height: 100%;
 	padding: 50px;
-	border: 5px solid #355c7d;
+	/* border: 5px solid #355c7d; */
 	overflow: auto;
 	margin: auto;
-	background-color: #e2ebf0;
+	margin-top: 50px;
+	background-color: #f5efef;
+	box-shadow: 5px 10px #355c7d;
 }
 
 .pageSwitcher {

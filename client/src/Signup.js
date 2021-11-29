@@ -40,7 +40,7 @@ const[signupForm,setSignupForm]=useState({
                   type="text"
                   id="name"
                   className="formFieldInput"
-                  placeholder="Enter your first name"
+                  placeholder="Enter first name"
                   name="name"
                   value={signupForm.name}
                   onChange={(e)=>handleChange(e)}
@@ -54,7 +54,7 @@ const[signupForm,setSignupForm]=useState({
                   type="text"
                   id="username"
                   className="formFieldInput"
-                  placeholder="Enter your username"
+                  placeholder="Enter username"
                   name="username"
                   value={signupForm.username}
                   onChange={(e)=>handleChange(e)}
@@ -68,7 +68,7 @@ const[signupForm,setSignupForm]=useState({
                   type="password"
                   id="password"
                   className="formFieldInput"
-                  placeholder="Enter your password"
+                  placeholder="Enter password"
                   name="password"
                   value={signupForm.password}
                   onChange={(e)=>handleChange(e)}
@@ -82,7 +82,7 @@ const[signupForm,setSignupForm]=useState({
                   type="password"
                   id="passwordConfirmation"
                   className="formFieldInput"
-                  placeholder="Confirm your password"
+                  placeholder="Confirm password"
                   name="passwordConfirmation"
                   value={signupForm.passwordConfirmation}
                   onChange={(e)=>handleChange(e)}

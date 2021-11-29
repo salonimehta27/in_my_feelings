@@ -1,11 +1,15 @@
 import React from 'react'
-import Signup from './Signup'
 import {NavLink}from 'react-router-dom'
+import './css/Navbar.css'
 
 function Navbar() {
     return (
-        <div>
-            <NavLink exact to="/signup">Sign up</NavLink>
+        <div className="nav-container">
+            <ul className="nav-list">
+                <li>
+            <NavLink exact to="/" className="nav-items">Home</NavLink></li>
+           <li> <NavLink exact to="/signup"className="nav-items">Sign up</NavLink></li>
+            </ul>
         </div>
     )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 
 function Disclaimer() {
     return (
-        <div style={{color:"#355c7d"}}>
+        <div style={{color:"#355c7d"}} className="appForm">
             DISCLAIMER: THIS WEBSITE DOES NOT PROVIDE MEDICAL ADVICE
             The information, including but not limited to, text, graphics, 
             images and other material contained on this website are for informational purposes only.
