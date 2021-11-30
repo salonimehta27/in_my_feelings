@@ -19,6 +19,6 @@ chatroom3=Chatroom.create(room_name:"Stressed")
 chatroom4=Chatroom.create(room_name:"I feel it all")
 
 
-user1=User.create(name:"Saloni",username:"Salonimehta",password_digest:"password123")
+user1=User.create(name:"Saloni",username:"Salonimehta",password_digest:"password123",has_agreed:"true")
 
 # message1=Message.create(user_id:user1.id,chatroom_id:chatroom1.id,message_body:"Hello")

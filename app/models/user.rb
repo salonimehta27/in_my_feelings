@@ -3,4 +3,5 @@ class User < ApplicationRecord
     has_many :chatrooms, through: :messages
 
     validates :username, presence: :true
+    has_secure_password
 end

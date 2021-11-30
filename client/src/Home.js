@@ -5,7 +5,7 @@ import './App.css'
 function Home() {
     return (
             <div className="container">
-            How do you feel today?
+            <p style={{fontFamily: 'Swanky and Moo Moo',fontSize:'50px',color:'#6284FF'}}>How do you feel today?</p>
                 <br/>
                <ul className="app-list">
                    

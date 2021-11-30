@@ -51,20 +51,20 @@
 	/* border: 5px solid #355c7d; */
 	overflow: hidden;
 	/* margin: auto; */
-	margin-top: 50px;
+	margin-top: 60px;
 	max-width: 100%;
 	min-height: 480px;
 }
 .app-list {
 	list-style: none;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	flex-direction: row;
 	padding: 5px;
-	margin-top: 200px;
+	margin-top: 50px;
 }
 .app-items {
 	text-decoration: none;
 	font-family: "Swanky and Moo Moo", cursive;
-	font-size: 23px;
+	font-size: 30px;
 }
