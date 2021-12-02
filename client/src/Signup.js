@@ -3,17 +3,23 @@ import {Link,NavLink} from 'react-router-dom'
 import {MdPassword} from 'react-icons/md'
 import {BsPersonFill,BsPersonLinesFill} from 'react-icons/bs'
 import PageSwitcher from './PageSwitcher'
+import {useNavigate} from 'react-router-dom'
+import { Container } from 'react-bootstrap'
 
 
-function Signup() {
-const[signupForm,setSignupForm]=useState({
+function Signup({onSignup}) {
+  const navigate=useNavigate()
+const[errors,setErrors]=useState([])
+
+const signupObj={
     name:"",
     username:"",
     password:"",
     passwordConfirmation:"",
     hasAgreed: false
-})
-
+}
+const[signupForm,setSignupForm]=useState(signupObj)
+console.log(signupForm.name)
     function handleChange(event) {
         let target = event.target;
         let value = target.type === "checkbox" ? target.checked : target.value;
@@ -24,10 +30,35 @@ const[signupForm,setSignupForm]=useState({
     
    function handleSubmit(e) {
         e.preventDefault();
+        fetch("/signup",{
+          method:"post",
+          headers:{
+            "content-type":"application/json"
+          },
+          body:JSON.stringify({
+            name: signupForm.name,
+            username: signupForm.username,
+            password: signupForm.password,
+            password_confirmation: signupForm.passwordConfirmation,
+            has_agreed: signupForm.hasAgreed
+          })
+        }).then((r)=>{
+          if(r.ok)
+          {
+            r.json().then(user=>{
+              onSignup(user)
+              setSignupForm(signupObj)
+              navigate('/signin')
+            })
+          }
+          else{
+            r.json().then((err)=>setErrors(err.errors))
+          }
+        })
       }
         return (
 
-            <div className="appForm">
+            <Container style={{height:"auto"}}>
     
             <PageSwitcher/>
             <div className="formCenter">
@@ -95,7 +126,7 @@ const[signupForm,setSignupForm]=useState({
                     className="formFieldCheckbox"
                     type="checkbox"
                     name="hasAgreed"
-                    value={signupForm.hasAgreed}
+                    checked={signupForm.hasAgreed}
                     onChange={(e)=>handleChange(e)}
                   />{" "}
                   I agree all statements in{" "}
@@ -113,7 +144,7 @@ const[signupForm,setSignupForm]=useState({
               </div>
             </form>
           </div>
-          </div>
+          </Container>
         );
    
 }

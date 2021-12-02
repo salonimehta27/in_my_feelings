@@ -4,10 +4,15 @@ import './css/Signin.css'
 import {MdPassword} from 'react-icons/md'
 import {BsPersonLinesFill} from 'react-icons/bs'
 import PageSwitcher from './PageSwitcher'
+import {useNavigate} from 'react-router-dom'
+import { Container } from 'react-bootstrap'
 
-function Signin() {
+function Signin({onSignin}) {
 const[username,setUsername]=useState("")
 const[password,setPassword]=useState("")
+const[errors,setErrors]=useState([])
+const[isLoading,setIsLoading]=useState(false)
+const navigate=useNavigate();
 
     function handleChange(e){
         if(e.target.name==="username"){
@@ -21,11 +26,35 @@ const[password,setPassword]=useState("")
 
   function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true)
+    fetch('/signin',{
+      method: "Post",
+      headers:{
+        "content-type":"application/json"
+      },
+      body:JSON.stringify({
+        username:username,
+        password:password
+      })
+    }).then((r)=>{
+      setIsLoading(false)
+      if(r.ok){
+        r.json()
+        .then((user)=>{
+          onSignin(user)
+        setUsername("")
+        setPassword("")
+       navigate("/");
+      })
+      } else{
+        r.json().then((err)=>setErrors(err.errors))
+      }
+    })
     }
 
     return (
-        <div className="appForm">
-                
+        
+        <Container>      
             <PageSwitcher/>
       <div className="formCenter">
         <form className="formFields" onSubmit={(e)=>handleSubmit(e)}>
@@ -58,6 +87,11 @@ const[password,setPassword]=useState("")
               onChange={(e)=>handleChange(e)}
             />
           </div>
+          <div className="formField">
+            {errors.map((err)=>(
+              <p>{err}</p>
+            ))}
+            </div>
 
           <div className="formField">
             <button className="formFieldButton">Sign In</button>{" "}
@@ -67,8 +101,8 @@ const[password,setPassword]=useState("")
           </div>
         </form>
       </div>
-      </div>
-        
+      </Container>  
+
     )
 }
 

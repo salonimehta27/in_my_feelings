@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import {Provider} from 'react-redux'
 import App from './App';
+import actionCable from 'actioncable'
+// import store from './store'
 
+//React Redux includes a <Provider /> component, which makes the Redux store available to the rest of your app:
 
 ReactDOM.render(
   <React.StrictMode>

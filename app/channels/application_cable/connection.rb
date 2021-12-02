@@ -5,7 +5,7 @@ module ApplicationCable
   class Connection < ActionCable::Connection::Base
     #anything after this line is my own code in this prewritten code
     #Connections are instances of ApplicationCable::Connection, which extends ActionCable::Connection::Base.
-  rescue_from StandardError, with: :report_error
+  # rescue_from StandardError, with: :report_error
   # indentified_by(*indentifiers) 
   # Mark a key as being the connection identifier index that can be used
   # to finf the specific connection again later.
@@ -36,8 +36,8 @@ module ApplicationCable
     # No code or such method found on the rails app 
     # so this might will just get deleted along with the rescue_from in this file
 
-    def report_error e
-      SomeExternalBugtrackingService.notify(e)
-    end
+    # def report_error e
+    #   SomeExternalBugtrackingService.notify(e)
+    # end
   end
 end
