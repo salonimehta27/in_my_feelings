@@ -3,7 +3,7 @@ import {NavLink}from 'react-router-dom'
 import './css/Navbar.css'
 
 function Navbar({user,setUser}) {
-console.log(user)
+// console.log("this is from navbar",user)
 
 // fetch('/users')
 // .then(r=>r.json())

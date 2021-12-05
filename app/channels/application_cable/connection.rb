@@ -20,8 +20,10 @@ module ApplicationCable
     private
     # what is cookies.encrypted? # where did the reject_unauthorized_connection come from
     def find_verified_user
-      if verified_user= User.find_by(id: cookies.encrypted[sessions[:user_id]])
+     
+      if verified_user= User.find_by(id: cookies.encrypted[:user_id])
         verified_user
+        byebug
       else
         reject_unauthorized_connection
         #this is a instance public method which can also be written as 
