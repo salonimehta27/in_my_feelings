@@ -1,6 +1,6 @@
 
 #For every WebSocket accepted by the server, a connection object is instantiated.
-
+#sole job is to authenticate and authorize the current user
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
     #anything after this line is my own code in this prewritten code
@@ -20,7 +20,7 @@ module ApplicationCable
     private
     # what is cookies.encrypted? # where did the reject_unauthorized_connection come from
     def find_verified_user
-      if verified_user= User.find_by(id: cookies.encrypted['_session']['user_id'])
+      if verified_user= User.find_by(id: cookies.encrypted[sessions[:user_id]])
         verified_user
       else
         reject_unauthorized_connection
