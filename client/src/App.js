@@ -58,8 +58,9 @@ function App({cableApp}) {
 
 
   function updateAppStateRoom(newRoom){
+    console.log("This is the updated rooms state",newRoom)
     setCurrentRoom({...currentRoom,
-      chatroom: newRoom.chatroom.data,
+      chatroom: newRoom.chatroom,
       users: newRoom.users,
       messages: newRoom.messages
     })
@@ -74,7 +75,7 @@ function App({cableApp}) {
     .then(result=>{
       console.log("this is where i should get result for chatroom/:id",result)
       setCurrentRoom({
-        chatroom: result.data,
+        chatroom: {id:result.id,room_name:result.room_name},
         users: result.users,
         messages: result.messages
       })

@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-
+skip_before_action :authorize
     def index 
         messages=Message.all
         render json: messages, include: :user, status: :ok
@@ -7,8 +7,8 @@ class MessagesController < ApplicationController
     end
 
     def create
-        message=Message.create(message_params)
-        chatroom= Chatroom.find(message_params[:chatroom_id])
+        message=Message.create(messages_params)
+        chatroom= Chatroom.find(messages_params[:chatroom_id])
         # instantiate new serializer instances manually. because we are using websockets 
         if message.save
             serialized_data=ActiveModelSerializers::Adapter::Json.new(
@@ -28,6 +28,6 @@ class MessagesController < ApplicationController
     private
 
     def messages_params
-        params.permit(:message_body,:user_id,:chatroom_id)
+        params.permit(:message_body,:user_id,:chatroom_id,:created_at)
     end
 end
