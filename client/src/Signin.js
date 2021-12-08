@@ -41,7 +41,7 @@ const navigate=useNavigate();
       if(r.ok){
         r.json()
         .then((user)=>{
-          onSignin(user)
+        onSignin(user)
         setUsername("")
         setPassword("")
        navigate("/");
@@ -87,11 +87,11 @@ const navigate=useNavigate();
               onChange={(e)=>handleChange(e)}
             />
           </div>
-          <div className="formField">
+          {/* <div className="formField">
             {errors.map((err)=>(
               <p>{err}</p>
             ))}
-            </div>
+            </div> */}
 
           <div className="formField">
             <button className="formFieldButton">Sign In</button>{" "}

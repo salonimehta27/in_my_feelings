@@ -2,6 +2,16 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
   resources :moods, only: [:index,:show]
   resources :chatrooms, only:[:index,:show,:create]
+
+
+  # resources :chatrooms, only:[:show] do
+  #   resources :users, only:[:show] 
+  # end
+
+  # resources :chatrooms, only:[:show] do
+  #   resources :messages, only:[:index]
+  # end
+
   resources :messages, only:[:index,:create]
   resources :users, only:[:index,:show,:destroy,:update,:create]
   get '/me',to: 'users#show'

@@ -4,8 +4,9 @@ import Chatfeed from './Chatfeed'
 import RoomWebSocket from './RoomWebSocket'
 
 function RoomShow({cableApp,updateApp,getRoomData,roomData,currentUser}) {
-console.log(roomData.users)
+console.log(roomData.chatroom)
 const[newMessage,setNewMessage]=useState("")
+const[messages,setMessages]=useState(roomData.messages)
 console.log("This is roomData in Roomshow",roomData)
 function displayUsers(users){
 
@@ -18,17 +19,12 @@ function handleMessageInput(event){
 }
 function submitMessage(e){
     e.preventDefault();
-    setNewMessage("");
-
-    // const message={
-       
-    // }
-
-    fetch('/messages',{
+    // setNewMessage("");
+    fetch("/messages",{
         method:"POST",
         headers: {
             "Content-Type": "application/json",
-            Accept: "application/json"
+            Accept:"application/json"
         },
         body: JSON.stringify({
             message_body:newMessage,
@@ -37,17 +33,19 @@ function submitMessage(e){
         })
     })
     .then(resp => resp.json())
-    .then(result => {console.log(result)})
-
-
-
+    .then(()=>{
+        // setMessages([...messages,result])
+        setNewMessage("")
+        // updateApp([...roomData.messages,result])
+    } )
 }
-console.log(roomData)
+// console.log(messages)
+// console.log(roomData)
     return (
         <div>
         <div>
             <ul>
-                {displayUsers(roomData.users)}
+                {/* {displayUsers(roomData.users.messages)} */}
             </ul>
         </div>
         <Chatfeed room={roomData.chatroom} currentUser={currentUser} />
