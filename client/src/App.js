@@ -68,7 +68,7 @@ function App({cableApp}) {
   console.log(currentRoom)
 
   function updateAppStateRoom(newRoom){
-    debugger;
+    // debugger;
     console.log("This is the updated rooms state",newRoom)
     setCurrentRoom({...currentRoom,
       chatroom: newRoom,

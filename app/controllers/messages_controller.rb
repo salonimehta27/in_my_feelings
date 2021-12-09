@@ -8,10 +8,10 @@ before_action :authorize
 
     def create 
         
-        user=User.find(session[:user_id])
-        message=user.messages.new(messages_params)
+        # user=User.find(session[:user_id])
+        # message=user.messages.new(messages_params)
         # byebug
-        
+        message=Message.new(messages_params)
         if message.save 
             # byebug
             chatroom=message.chatroom
