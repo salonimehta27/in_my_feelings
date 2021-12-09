@@ -4,20 +4,19 @@ import Chatfeed from './Chatfeed'
 import RoomWebSocket from './RoomWebSocket'
 
 function RoomShow({cableApp,updateApp,getRoomData,roomData,currentUser}) {
-console.log(roomData.chatroom)
+console.log(roomData)
 const[newMessage,setNewMessage]=useState("")
 const[messages,setMessages]=useState(roomData.messages)
-console.log("This is roomData in Roomshow",roomData)
 function displayUsers(users){
 
     return users.map(user=>{return <li key={user.id}>{users.username}</li>})
 
 }
-console.log(currentUser)
 function handleMessageInput(event){
     setNewMessage(event.target.value)
 }
 function submitMessage(e){
+    // debugger;
     e.preventDefault();
     // setNewMessage("");
     fetch("/messages",{
@@ -48,7 +47,7 @@ function submitMessage(e){
                 {/* {displayUsers(roomData.users.messages)} */}
             </ul>
         </div>
-        <Chatfeed room={roomData.chatroom} currentUser={currentUser} />
+        <Chatfeed room={roomData.room} currentUser={currentUser} />
             <form id='chat-form' onSubmit={submitMessage}>
                 <h3>Post a new message:</h3>
                 <textarea type='text' value={newMessage} onChange={handleMessageInput}></textarea>

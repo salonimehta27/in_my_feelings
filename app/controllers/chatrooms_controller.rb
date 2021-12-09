@@ -1,5 +1,5 @@
 class ChatroomsController < ApplicationController
- skip_before_action :authorize, only:[:index]
+ before_action :authorize
   
 def index 
   current_user=User.find(session[:user_id])
@@ -16,22 +16,21 @@ def create
   params[:users].each do|name|
     user=User.find_by(username: name)
     (@chatroom.users<<user) unless @chatroom.users.include?(current_user)
-  end
+    end
     render json:{
       chatroom: @chatroom,
       users: @chatroom.users
     }
   end
+
 end
 
 def show
   # current_user=User.find(session[:user_id])
   # chatroom = current_user.chatrooms.find(params[:id])
-  # render json: chatroom
-
- 
-  chatroom = Chatroom.find(params[:id])
-  render json: chatroom
+  # render json: ChatroomSerializer.new(chatroom)
+   chatroom = Chatroom.find(params[:id])
+   render json: ChatroomSerializer.new(chatroom).serialized_json
 end
  
 #  def index 
@@ -58,6 +57,6 @@ end
   # end
  private
  def chatroom_params 
-  params.permit(:room_name,:chatroom_id)
+  params.permit(:room_name)
  end
 end

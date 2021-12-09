@@ -21,8 +21,8 @@ function App({cableApp}) {
   // const {chatroomId}=useParams()
   // // const navigate=useNavigate()
   // console.log(chatroomId)
-  const[currentUser,setUser]=useState(null)
-  const[users,setUsers]=useState([])
+  const[currentUser,setCurrentUser]=useState(null)
+  const[allUsers,setAllUsers]=useState([])
   const[chatrooms,setChatrooms]=useState([])
   const[currentRoom,setCurrentRoom]=useState({
     chatroom:{},
@@ -34,7 +34,7 @@ function App({cableApp}) {
     fetch("/me")
     .then((r)=>{
       if(r.ok){
-        r.json().then(user=>setUser(user));
+        r.json().then(result=>setCurrentUser(result.data.attributes));
       }
       else{
         r.json().then(err=><p>{err.errors}</p>)
@@ -43,8 +43,12 @@ function App({cableApp}) {
 
     fetch("/users")
     .then(r=>r.json())
-    .then(users=>setUsers(users))
-    console.log("Users inside the use effect",users)
+    .then(users=>{
+      // debugger;
+      // console.log(users)
+      setAllUsers(()=>users.data.map(x=>x.attributes))
+    })
+    // console.log("Users inside the use effect",allUsers)
 
     fetch('/chatrooms')
     .then(resp=>resp.json())
@@ -54,17 +58,17 @@ function App({cableApp}) {
   },[])
   // console.log(chatrooms)
 
-  
+  console.log(currentUser)
+  console.log(allUsers)
 
   function handleSignups(newUser){
-    setUsers({...users,newUser})
+    setAllUsers({...allUsers,newUser})
   }
-  // console.log(users)
-  // console.log(currentUser)
+ 
   console.log(currentRoom)
 
   function updateAppStateRoom(newRoom){
-    // debugger;
+    debugger;
     console.log("This is the updated rooms state",newRoom)
     setCurrentRoom({...currentRoom,
       chatroom: newRoom,
@@ -81,11 +85,12 @@ function App({cableApp}) {
     fetch(`/chatrooms/${id}`)
     .then(res=>res.json())
     .then(result=>{
+      // debugger;
       console.log("this is where i should get result for chatroom/:id",result)
       setCurrentRoom({
-        chatroom: result,
-        users: result.users,
-        messages: result.messages
+        chatroom: result.data.attributes,
+        users: result.data.attributes.users.data,
+        messages: result.data.attributes.messages
       })
     })
 
@@ -120,17 +125,17 @@ console.log(currentRoom)
   return (
     <Router>
       <div className="App">
-        <Navbar user={currentUser} setUser={setUser}/>
+        <Navbar user={currentUser} setUser={setCurrentUser}/>
             <Routes>
             <Route exact path="/" element={<Home/>}/>
             <Route path="/signup" element={<Signup onSignup={handleSignups}/>}/>
-            <Route path="/signin" element={<Signin onSignin={setUser}/>}/>
+            <Route path="/signin" element={<Signin onSignin={setCurrentUser}/>}/>
             <Route path="/disclaimer" element={<Disclaimer/>}/>
             <Route exact path="/chatrooms" element={<ChatroomList handleSubscr/>}/>
             {/* <Route exact path="/chatrooms/:id" element={}/> */}
             {currentUser&&<Route path="/chatrooms/:id" element={
             <RoomShow 
-              users={users}
+              users={allUsers}
               cableApp={cableApp}
               updateApp={updateAppStateRoom}
               getRoomData={getRoomData}
