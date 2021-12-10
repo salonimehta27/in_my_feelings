@@ -4,4 +4,9 @@ class MoodsController < ApplicationController
         moods=Mood.all
         render json: moods
     end
+
+    def show
+        mood=Mood.find(params[:id])
+        render json: mood, status: :ok
+    end
 end

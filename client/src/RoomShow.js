@@ -1,15 +1,20 @@
 import React,{useState} from 'react'
 import {useParams} from 'react-router'
 import Chatfeed from './Chatfeed'
+import MessagesArea from './MessagesArea'
 import RoomWebSocket from './RoomWebSocket'
+import {Container,Form} from 'react-bootstrap'
+import './css/Chat.css'
 
 function RoomShow({cableApp,updateApp,getRoomData,roomData,currentUser}) {
-console.log(roomData)
+// console.log(roomData)
 const[newMessage,setNewMessage]=useState("")
+// const{chatroomId}=useParams()
+// console.log(window.location.href.match(/\d+$/)[0])
 const[messages,setMessages]=useState(roomData.messages)
-function displayUsers(users){
+function displayUsers(msgs){
 
-    return users.map(user=>{return <li key={user.id}>{users.username}</li>})
+    return msgs.map(msg=>{return <li key={msg.id} style={{color:"black"}}>{msg.message_body} </li>})
 
 }
 function handleMessageInput(event){
@@ -27,33 +32,27 @@ function submitMessage(e){
         },
         body: JSON.stringify({
             message_body:newMessage,
-            user_id:currentUser.id,
-            chatroom_id:roomData.chatroom.id
+            user_id:currentUser.data.attributes.id,
+            chatroom_id:window.location.href.match(/\d+$/)[0]
         })
     })
     .then(resp => resp.json())
     .then(()=>{
-        // setMessages([...messages,result])
         setNewMessage("")
-        // updateApp([...roomData.messages,result])
     } )
 }
 // console.log(messages)
 // console.log(roomData)
     return (
-        <div>
+       <Container>
         <div>
             <ul>
-                {/* {displayUsers(roomData.users.messages)} */}
+                {displayUsers(roomData.messages)}
             </ul>
         </div>
-        <Chatfeed room={roomData.room} currentUser={currentUser} />
-            <form id='chat-form' onSubmit={submitMessage}>
-                <h3>Post a new message:</h3>
-                <textarea type='text' value={newMessage} onChange={handleMessageInput}></textarea>
-                <br></br>
-                <input type='submit'></input>
-            </form>
+
+        <Chatfeed room={roomData} currentUser={currentUser} />
+        <MessagesArea submitMessage={submitMessage} newMessage={newMessage} onMessageInput={handleMessageInput}/>
 
             <RoomWebSocket
                     cableApp={cableApp}
@@ -61,7 +60,8 @@ function submitMessage(e){
                     getRoomData={getRoomData}
                     roomData={roomData}
                 />
-        </div>
+       
+        </Container>
     )
 }
 

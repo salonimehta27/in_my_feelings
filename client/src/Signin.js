@@ -50,6 +50,15 @@ const navigate=useNavigate();
         r.json().then((err)=>setErrors(err.errors))
       }
     })
+    // fetch("/me")
+    // .then((r)=>{
+    //   if(r.ok){
+    //     r.json().then(result=>(result));
+    //   }
+    //   else{
+    //     r.json().then(err=><p>{err.errors}</p>)
+    //   }
+    // })
     }
 
     return (

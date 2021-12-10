@@ -4,13 +4,13 @@ import Signin from './Signin';
 import Home from './Home';
 import Navbar from './Navbar';
 import RoomShow from './RoomShow';
+import Mood from './Mood';
 import {useState,useEffect} from 'react'
 import {BrowserRouter as Router, Routes,Route} from 'react-router-dom'
 import Disclaimer from './Disclaimer';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useNavigate, useParams } from 'react-router';
 import {Button,Alert,Breadcrumb,Card} from 'react-bootstrap'
-import ChatroomList from './ChatroomList';
 
 
 function App({cableApp}) {
@@ -31,22 +31,22 @@ function App({cableApp}) {
   })
   
   useEffect(()=>{
-    fetch("/me")
-    .then((r)=>{
-      if(r.ok){
-        r.json().then(result=>setCurrentUser(result.data.attributes));
-      }
-      else{
-        r.json().then(err=><p>{err.errors}</p>)
-      }
-    })
+    // fetch("/me")
+    // .then((r)=>{
+    //   if(r.ok){
+    //     r.json().then(result=>setCurrentUser(result));
+    //   }
+    //   else{
+    //     r.json().then(err=><p>{err.errors}</p>)
+    //   }
+    // })
 
     fetch("/users")
     .then(r=>r.json())
     .then(users=>{
       // debugger;
       // console.log(users)
-      setAllUsers(()=>users.data.map(x=>x.attributes))
+      setAllUsers(users)
     })
     // console.log("Users inside the use effect",allUsers)
 
@@ -55,8 +55,9 @@ function App({cableApp}) {
     .then(chatrooms=>{
       setChatrooms(chatrooms)
     })
+
   },[])
-  // console.log(chatrooms)
+
 
   console.log(currentUser)
   console.log(allUsers)
@@ -76,7 +77,9 @@ function App({cableApp}) {
       messages: newRoom.messages
     })
   }
-
+  function handleUpdateCurrentUser(user){
+    setCurrentUser(user)
+  }
   
 
 
@@ -129,9 +132,9 @@ console.log(currentRoom)
             <Routes>
             <Route exact path="/" element={<Home/>}/>
             <Route path="/signup" element={<Signup onSignup={handleSignups}/>}/>
-            <Route path="/signin" element={<Signin onSignin={setCurrentUser}/>}/>
+            <Route path="/signin" element={<Signin onSignin={handleUpdateCurrentUser}/>}/>
             <Route path="/disclaimer" element={<Disclaimer/>}/>
-            <Route exact path="/chatrooms" element={<ChatroomList handleSubscr/>}/>
+            {/* <Route exact path="/chatrooms" element={<ChatroomList handleSubscr/>}/> */}
             {/* <Route exact path="/chatrooms/:id" element={}/> */}
             {currentUser&&<Route path="/chatrooms/:id" element={
             <RoomShow 
@@ -143,6 +146,7 @@ console.log(currentRoom)
               currentUser={currentUser}
               />
             }/>}
+            <Route exact path="/moods/:id" element={<Mood/>}></Route>
             </Routes>
       </div>
     </Router>

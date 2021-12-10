@@ -2,7 +2,7 @@ class MessagesChannel < ApplicationCable::Channel
   def subscribed
     # stream_from "some_channel"
     # stop_all_streams
-    chatroom=Chatroom.find(params[:chatroom])
+    chatroom=Chatroom.find(params[:room])
     stream_for chatroom
   end
   # def received data

@@ -8,7 +8,6 @@ function PageSwitcher() {
             <div className="pageSwitcher">
               <NavLink
                 exact to="/signin"
-                activeClassName="pageSwitcherItem-active"
                 className="pageSwitcherItem"
               >
                 Sign In
@@ -16,7 +15,6 @@ function PageSwitcher() {
               <NavLink
                 exact
                 to="/signup"
-                activeClassName="pageSwitcherItem-active"
                 className="pageSwitcherItem"
               >
                 Sign Up

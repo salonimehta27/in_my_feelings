@@ -4,11 +4,11 @@ import './css/Navbar.css'
 
 function Navbar({user,setUser}) {
 // console.log("this is from navbar",user)
-
+// console.log(user.attributes.name)
 // fetch('/users')
 // .then(r=>r.json())
 // .then(console.log)
-
+// console.log(user)
     function handleSignout(){
         fetch("/signout",{
             method:"delete"
@@ -19,15 +19,28 @@ function Navbar({user,setUser}) {
         })
     }
     return (
+
         <div className="nav-container">
             <ul className="nav-list">
-                <li>
-            {user?<NavLink exact to="/" className="nav-items">Home</NavLink>:null}</li>
-            {/* <li className="nav-items">{user?`Hi , ${user.name.toUpperCase()}`:null}</li> */}
-          {user?<li><button className="nav-button" onClick={handleSignout}>Sign out</button></li>: <li> <NavLink exact to="/signup"className="nav-items">Sign up/Sign in</NavLink></li>}
+            {user!=null?<>
+            <li><NavLink to="/" className="nav-items">Home</NavLink></li>
+            <li className="nav-items">{`Hi , ${user.data.attributes.name.toUpperCase()}`}</li> 
+            <li><button className="nav-button" onClick={handleSignout}>Sign out</button></li>
+            </>
+             :<li> <NavLink exact to="/signup"className="nav-items">Sign up/Sign in</NavLink></li>}
             </ul>
         </div>
     )
+
+    //     <div className="nav-container">
+    //         <ul className="nav-list">
+    //             <li>
+    //         {user?<NavLink to="/" className="nav-items">Home</NavLink>:null}</li>
+    //         {/* <li className="nav-items">{user?`Hi , ${user.data.attributes.name.toUpperCase()}`:null}</li> */}
+    //       {user?<li><button className="nav-button" onClick={handleSignout}>Sign out</button></li>: <li> <NavLink exact to="/signup"className="nav-items">Sign up/Sign in</NavLink></li>}
+    //         </ul>
+    //     </div>
+    // )
 }
 
 export default Navbar

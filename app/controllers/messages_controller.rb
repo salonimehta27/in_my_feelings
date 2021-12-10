@@ -12,6 +12,7 @@ before_action :authorize
         # message=user.messages.new(messages_params)
         # byebug
         message=Message.new(messages_params)
+        # byebug
         if message.save 
             # byebug
             chatroom=message.chatroom

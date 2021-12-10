@@ -1,10 +1,8 @@
 import React, {useState,useEffect} from 'react'
-import {ActionCable} from 'react-actioncable-provider'
 import { useParams } from 'react-router'
 import {API_ROOT} from './constants'
 import MessagesArea from './MessagesArea'
 import NewChatroomForm from './NewChatroomForm'
-import Cable from './Cable'
 
 
 function ChatroomList() {
@@ -29,10 +27,6 @@ function ChatroomList() {
     // }
     return (
         <div>
-            <ActionCable 
-            channel={{channel: 'ChatroomChannel'}}
-            onReceived={handleReceivedChatroom}
-            ></ActionCable>
         </div>
     )
 }

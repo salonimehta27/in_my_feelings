@@ -11,10 +11,10 @@ function Home() {
                 <br/>
                <ul className="app-list">
                    
-            <li>  <NavLink exact to="/chatrooms/1" className="app-items">😁 Happy</NavLink> </li>
-            <li> <NavLink exact to="/chatrooms/2" className="app-items">😭 Sad</NavLink></li>
-            <li>  <NavLink exact to="/chatrooms/3" className="app-items">😩 Stressed</NavLink></li>
-            <li> <NavLink exact to="/chatrooms/4" className="app-items">😌 i feel it all</NavLink> </li>
+            <li>  <NavLink exact to="/moods/1" className="app-items">😁 Happy</NavLink> </li>
+            <li> <NavLink exact to="/moods/2" className="app-items">😭 Sad</NavLink></li>
+            <li>  <NavLink exact to="/moods/3" className="app-items">😩 Stressed</NavLink></li>
+            <li> <NavLink exact to="/moods/4" className="app-items">😌 i feel it all</NavLink> </li>
               </ul>
             
               </Container>
