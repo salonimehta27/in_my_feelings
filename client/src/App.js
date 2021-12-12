@@ -31,16 +31,6 @@ function App({cableApp}) {
   })
   
   useEffect(()=>{
-    // fetch("/me")
-    // .then((r)=>{
-    //   if(r.ok){
-    //     r.json().then(result=>setCurrentUser(result));
-    //   }
-    //   else{
-    //     r.json().then(err=><p>{err.errors}</p>)
-    //   }
-    // })
-
     fetch("/users")
     .then(r=>r.json())
     .then(users=>{
@@ -63,6 +53,7 @@ function App({cableApp}) {
   console.log(allUsers)
 
   function handleSignups(newUser){
+    // debugger;
     setAllUsers({...allUsers,newUser})
   }
  
@@ -80,8 +71,15 @@ function App({cableApp}) {
   function handleUpdateCurrentUser(user){
     setCurrentUser(user)
   }
-  
-
+  function handleCurrentRoom(result){
+  return {
+      chatroom: result.data.attributes,
+      users: result.data.attributes.users.data,
+      messages: result.data.attributes.messages
+    }
+  }
+  // const get=handleCurrentRoom()
+  // console.log(get)
 
   function getRoomData(id){
 
@@ -90,11 +88,7 @@ function App({cableApp}) {
     .then(result=>{
       // debugger;
       console.log("this is where i should get result for chatroom/:id",result)
-      setCurrentRoom({
-        chatroom: result.data.attributes,
-        users: result.data.attributes.users.data,
-        messages: result.data.attributes.messages
-      })
+      setCurrentRoom(()=>handleCurrentRoom(result))
     })
 
   }

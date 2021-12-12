@@ -1,6 +1,5 @@
 .App {
-	height: 140vh;
-	display: flex;
+	min-height: 100vh;
 	color: white;
 	overflow: hidden;
 	background-color: #8bc6ec;

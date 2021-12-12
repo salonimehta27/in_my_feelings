@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {useParams} from 'react-router'
 import Chatfeed from './Chatfeed'
 import MessagesArea from './MessagesArea'
@@ -12,18 +12,23 @@ const[newMessage,setNewMessage]=useState("")
 // const{chatroomId}=useParams()
 // console.log(window.location.href.match(/\d+$/)[0])
 const[messages,setMessages]=useState(roomData.messages)
-function displayUsers(msgs){
 
-    return msgs.map(msg=>{return <li key={msg.id} style={{color:"black"}}>{msg.message_body} </li>})
-
-}
+const chatroomId=window.location.href.match(/\d+$/)[0]
+useEffect(()=>{
+    fetch(`/chatrooms/${chatroomId}`)
+    .then(resp=>resp.json())
+    .then("this",console.log)
+},[])
+// function displayUsers(){
+//    return roomData.users.map((user)=><li key={user.id}>{user.username}</li>)
+// }
 function handleMessageInput(event){
     setNewMessage(event.target.value)
 }
 const message={
     message_body:newMessage,
     user_id:currentUser.data.attributes.id,
-    chatroom_id:window.location.href.match(/\d+$/)[0]
+    chatroom_id:chatroomId
 }
 function submitMessage(e){
     // debugger;
@@ -39,8 +44,8 @@ function submitMessage(e){
     })
     .then(resp => resp.json())
     .then(()=>{
-        let messageDiv=document.getElementById('messages')
-        messageDiv.scrollTop=messageDiv.scrollHeight
+        // let messageDiv=document.getElementById('messages')
+        // messageDiv.scrollTop=messageDiv.scrollHeight
         setNewMessage("")
     } )
 }
@@ -48,13 +53,13 @@ function whichUser(message){
     // debugger
  const user= roomData.users.find((x)=>parseInt(x.id)===message.user_id)
  return user
- console.log(user)
+//  console.log(user)
 }
-
+console.log(roomData.users.filter((item,i,ar)=>ar.indexOf(item)===i))
 function displayMessages(messages){
     return messages.map(msg=>{
         const user=whichUser(msg)
-        console.log(user)
+        // console.log(user)
        return( msg.message_body!==null?
         <Chatfeed key={msg.id} room={roomData} user={user} currentUser={currentUser} allUsers={users} message={msg}/>
         :
@@ -65,18 +70,29 @@ function displayMessages(messages){
 // console.log(roomData)
     return (
         // <Container style={{overflow:"auto", height:"95%"}}>
-            <div className="wrapper" style={{overflow:"auto"}}>
-            <div id="chat-feed">
-                <div id="messages">
+            <div className="chat-container">
+
+              <div className="users">
+                  <br></br>
+                  {/* {displayUsers()} */}
+              </div>  
+            <div id="messages" className="message-feed">
+                <div>
                     {roomData.messages!==undefined && roomData.messages.length>0?
                     displayMessages(roomData.messages):
                     <h3>This room has no message yet</h3>}
                 </div>
-
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <MessagesArea submitMessage={submitMessage} newMessage={newMessage} onMessageInput={handleMessageInput}/>
             </div>
-
+            
         
-        <MessagesArea submitMessage={submitMessage} newMessage={newMessage} onMessageInput={handleMessageInput}/>
+       
 
             <RoomWebSocket
                     cableApp={cableApp}
@@ -85,7 +101,7 @@ function displayMessages(messages){
                     roomData={roomData}
                 />
    </div>
-    // </Container>
+    // </div>
     
     )
 }
