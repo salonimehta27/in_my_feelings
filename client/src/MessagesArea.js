@@ -1,13 +1,16 @@
 import React from 'react'
 import {Container,Form} from 'react-bootstrap'
 function MessagesArea({submitMessage,newMessage,onMessageInput}) {
-    return (    
-            <Form id='chat-form' onSubmit={submitMessage}>
-            <h3>Post a new message:</h3>
-            <textarea type='text' value={newMessage} onChange={onMessageInput}></textarea>
+    return (   
+      
+        <div className="message-form-container">
+            <form id='chat-form' className="message-form" onSubmit={submitMessage}>
+            <textarea type='text' className="message-input" placeholder="post new message" value={newMessage} onChange={onMessageInput}></textarea>
             <br></br>
-            <input type='submit'></input>
-            </Form>
+            <input className="send-button"type='submit'></input>
+            </form>
+         </div>
+    
     )
 }
 
