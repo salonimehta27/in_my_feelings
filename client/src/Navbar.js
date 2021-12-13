@@ -22,8 +22,8 @@ function Navbar({user,setUser}) {
 
         <div className="nav-container">
             <ul className="nav-list">
-            {user!=null?<>
             <li><NavLink to="/" className="nav-items">Home</NavLink></li>
+            {user!=null?<>
             <li className="nav-items">{`Hi , ${user.data.attributes.name.toUpperCase()}`}</li> 
             <li><button className="nav-button" onClick={handleSignout}>Sign out</button></li>
             </>

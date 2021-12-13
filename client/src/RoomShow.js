@@ -6,6 +6,7 @@ import RoomWebSocket from './RoomWebSocket'
 import Search from './Search'
 import {Container,Form} from 'react-bootstrap'
 import './css/Chat.css'
+import {useNavigate} from 'react-router'
 
 function RoomShow({cableApp,updateApp,getRoomData,messages,handleMessageUpdate,roomData,currentUser,users}) {
 console.log(roomData)
@@ -13,7 +14,7 @@ const[newMessage,setNewMessage]=useState("")
 const[getData,setGetData]=useState(null)
 const[search,setSearch]=useState("")
 const chatroomId=window.location.href.match(/\d+$/)[0]
- 
+const navigate=useNavigate()
 useEffect(()=>{
     fetch(`/chatrooms/${chatroomId}`)
     .then(resp=>resp.json())

@@ -24,7 +24,6 @@ function App({cableApp}) {
     messages: []
   })
   const[messages,setMessages]=useState(null)
- 
   useEffect(()=>{
     fetch("/users")
     .then(r=>r.json())
@@ -113,7 +112,7 @@ console.log(currentRoom)
             <Route path="/signup" element={<Signup onSignup={handleSignups}/>}/>
             <Route path="/signin" element={<Signin onSignin={handleUpdateCurrentUser}/>}/>
             <Route path="/disclaimer" element={<Disclaimer/>}/>
-            {currentUser&&<Route path="/chatrooms/:id" element={
+            {currentUser&&<Route path={currentUser?"/chatrooms/:id":"/signin"} element={
             <RoomShow 
               users={allUsers}
               cableApp={cableApp}
@@ -124,8 +123,9 @@ console.log(currentRoom)
               messages={messages}
               handleMessageUpdate={setMessages}
               />
-            }/>}
-            <Route exact path="/moods/:id" element={<Mood/>}></Route>
+            }/>
+              }
+            <Route exact path="/moods/:id" element={<Mood currentUser={currentUser}/>}></Route>
             </Routes>
             <Footer/>
       </div>
