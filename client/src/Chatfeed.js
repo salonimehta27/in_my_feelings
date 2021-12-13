@@ -1,11 +1,18 @@
-import React from 'react'
-
-function Chatfeed({currentUser,room,allUsers,user,message}) {
+import React,{useState} from 'react'
+import {AiFillDelete} from 'react-icons/ai'
+import {GiHelp} from 'react-icons/gi'
+import {AiFillEdit} from 'react-icons/ai'
+function Chatfeed({currentUser,room,allUsers,user,message,onDeleteMessage}) {
+    const[showHelp,setShowHelp]=useState(false)
     // console.log(currentUser.data.attributes.id)
     // console.log(currentUser)
     // // console.log(user)
     
-    // console.log(message)
+    console.log(message)
+
+    function showEditAndDelete(){
+        setShowHelp(!showHelp)
+    }
     const timestamp = new Date(message.created_at).toLocaleTimeString();
     const whichUser=()=>{
         if(message.user_id===parseInt(currentUser.data.id)){
@@ -20,10 +27,17 @@ function Chatfeed({currentUser,room,allUsers,user,message}) {
         
         <div id="chat-message" className={whichUser()}>
             
-        <i style={{float:"left",fontSize:"8px"}}>{user.username}</i>
+        {user!==undefined&&<i style={{float:"left",fontSize:"8px"}}>{user.username}</i>}
         <img style={{height:"auto",width:"30px",float:"right"}} src="https://yorktonrentals.com/wp-content/uploads/2017/06/usericon.png" alt="avatar"/>
         <p style={{color:"black", height:"auto"}}>{message.message_body}</p>
         <i style={{fontSize:"10px"}}>{timestamp}</i>
+        {whichUser()==='current-user-message'&&<GiHelp style={{float:"left"}}onClick={showEditAndDelete}></GiHelp>}
+        {(showHelp&&whichUser()==='current-user-message')?
+        <>
+        <AiFillEdit style={{float:"left"}}></AiFillEdit>
+        <AiFillDelete onClick={()=>onDeleteMessage(message.id)} style={{float:"left"}}></AiFillDelete>
+        </>:null}
+
         </div>
 
       

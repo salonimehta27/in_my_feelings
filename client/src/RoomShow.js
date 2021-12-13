@@ -3,25 +3,35 @@ import {useParams} from 'react-router'
 import Chatfeed from './Chatfeed'
 import MessagesArea from './MessagesArea'
 import RoomWebSocket from './RoomWebSocket'
+import Search from './Search'
 import {Container,Form} from 'react-bootstrap'
 import './css/Chat.css'
 
-function RoomShow({cableApp,updateApp,getRoomData,roomData,currentUser,users}) {
+function RoomShow({cableApp,updateApp,getRoomData,messages,handleMessageUpdate,roomData,currentUser,users}) {
 console.log(roomData)
 const[newMessage,setNewMessage]=useState("")
-// const{chatroomId}=useParams()
-// console.log(window.location.href.match(/\d+$/)[0])
-const[messages,setMessages]=useState(roomData.messages)
-
+const[getData,setGetData]=useState(null)
+const[search,setSearch]=useState("")
 const chatroomId=window.location.href.match(/\d+$/)[0]
+ 
 useEffect(()=>{
     fetch(`/chatrooms/${chatroomId}`)
     .then(resp=>resp.json())
-    .then("this",console.log)
+    .then(res=>{
+        setGetData(res.data.attributes.users.data)
+       handleMessageUpdate(res.data.attributes.messages)
+    })
 },[])
-// function displayUsers(){
-//    return roomData.users.map((user)=><li key={user.id}>{user.username}</li>)
-// }
+function displayUsers(data){
+    return data.map(x=>x.attributes).filter((user)=>user.username.toLowerCase().includes(search.toLowerCase())).map((user)=>{
+       return <div style={{overflowY:"scroll",scrollBehavior:"smooth"}}>
+        <img style={{height:"auto",width:"30px",float:"left"}} src="https://yorktonrentals.com/wp-content/uploads/2017/06/usericon.png" alt="avatar"/>
+        <h6 style={{color:"white",listStyle:"none",overflowY:"scroll",float:"left"}}>@{user.username}</h6>
+       </div>
+   })
+}
+
+console.log(getData)
 function handleMessageInput(event){
     setNewMessage(event.target.value)
 }
@@ -44,56 +54,68 @@ function submitMessage(e){
     })
     .then(resp => resp.json())
     .then(()=>{
-        // let messageDiv=document.getElementById('messages')
-        // messageDiv.scrollTop=messageDiv.scrollHeight
+        let messageDiv=document.getElementById('messages')
+        messageDiv.scrollTop=messageDiv.scrollHeight
         setNewMessage("")
     } )
 }
 function whichUser(message){
-    // debugger
  const user= roomData.users.find((x)=>parseInt(x.id)===message.user_id)
  return user
-//  console.log(user)
+
 }
-console.log(roomData.users.filter((item,i,ar)=>ar.indexOf(item)===i))
+
+
 function displayMessages(messages){
+
     return messages.map(msg=>{
         const user=whichUser(msg)
         // console.log(user)
        return( msg.message_body!==null?
-        <Chatfeed key={msg.id} room={roomData} user={user} currentUser={currentUser} allUsers={users} message={msg}/>
+        <Chatfeed key={msg.id} room={roomData} user={user} onDeleteMessage={handleDeleteClick} currentUser={currentUser} allUsers={users} message={msg}/>
         :
         <div></div>
     )})
 }
+
+function handleDeleteClick(id) {
+    fetch(`/messages/${id}`, {
+      method: "DELETE"
+    })
+    
+    const updatedMessages=messages.filter(message=>message.id!==id)
+    handleMessageUpdate(updatedMessages)
+  }
 // console.log(messages)
 // console.log(roomData)
     return (
-        // <Container style={{overflow:"auto", height:"95%"}}>
             <div className="chat-container">
-
               <div className="users">
+                  <p style={{float:"left"}}>#{roomData.chatroom.room_name}</p>
+                  <h4 style={{float:"left"}}>Chatroom Members</h4>
                   <br></br>
-                  {/* {displayUsers()} */}
+                  <br></br>
+                  <br></br>
+                  <br></br>
+                  <br></br>
+                  <Search search={search} setSearch={setSearch}></Search>
+                  {getData!==null?displayUsers(getData):null}
               </div>  
-            <div id="messages" className="message-feed">
+              <div id="messages" className="message-feed">
                 <div>
-                    {roomData.messages!==undefined && roomData.messages.length>0?
-                    displayMessages(roomData.messages):
-                    <h3>This room has no message yet</h3>}
+                    {messages!==null && messages.length>0?
+                    displayMessages(messages):
+                    <h3 style={{color:"blue",marginTop:"50px"}}>This room has no message yet</h3>}
                 </div>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
+                  <br></br>
+                  <br></br>
+                  <br></br>
+                  <br></br>
+                  <br></br>
+                  <br></br>
+                  <br></br>
                 <MessagesArea submitMessage={submitMessage} newMessage={newMessage} onMessageInput={handleMessageInput}/>
-            </div>
-            
-        
-       
-
+               </div>
             <RoomWebSocket
                     cableApp={cableApp}
                     updateApp={updateApp}
@@ -101,8 +123,6 @@ function displayMessages(messages){
                     roomData={roomData}
                 />
    </div>
-    // </div>
-    
     )
 }
 

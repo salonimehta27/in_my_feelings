@@ -56,8 +56,14 @@ before_action :authorize
 
     # end
 
+    def update
+    message=Message.find(params[:id])
+    message.update(messages_params)
+    render json: message
+    end
+
     def destroy 
-        message=Message.find_by(id: params[:message_id])
+        message=Message.find_by(id: params[:id])
         message.delete 
         head :no_content
     end

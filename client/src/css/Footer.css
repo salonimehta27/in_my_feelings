@@ -1,0 +1,19 @@
+.footer-container {
+	height: 50px;
+	/* background-color: #a3bded; */
+	background-color: #4158d0;
+	background-image: linear-gradient(
+		43deg,
+		#4158d0 0%,
+		#c850c0 46%,
+		#ffcc70 100%
+	);
+	position: fixed;
+	width: 100%;
+	overflow: auto;
+	bottom: 0;
+	margin-bottom: 0;
+	padding-bottom: 2.5rem;
+	transition: bottom 0.3s;
+	/* margin: auto; */
+}

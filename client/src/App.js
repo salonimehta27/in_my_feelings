@@ -5,6 +5,7 @@ import Home from './Home';
 import Navbar from './Navbar';
 import RoomShow from './RoomShow';
 import Mood from './Mood';
+import Footer from './Footer';
 import {useState,useEffect} from 'react'
 import {BrowserRouter as Router, Routes,Route} from 'react-router-dom'
 import Disclaimer from './Disclaimer';
@@ -14,13 +15,6 @@ import {Button,Alert,Breadcrumb,Card} from 'react-bootstrap'
 
 
 function App({cableApp}) {
-  //1. based on blog i need current user state to be null which i already have as a user variable set to null
-  //2. create a state for all the rooms and set that to empty array
-  //3. set a state for the currentRoom{ chatroom: {},users:[],messages:[]}
-  // const navigate=useNavigate()
-  // const {chatroomId}=useParams()
-  // // const navigate=useNavigate()
-  // console.log(chatroomId)
   const[currentUser,setCurrentUser]=useState(null)
   const[allUsers,setAllUsers]=useState([])
   const[chatrooms,setChatrooms]=useState([])
@@ -29,35 +23,28 @@ function App({cableApp}) {
     users: [],
     messages: []
   })
-  
+  const[messages,setMessages]=useState(null)
+ 
   useEffect(()=>{
     fetch("/users")
     .then(r=>r.json())
     .then(users=>{
-      // debugger;
-      // console.log(users)
       setAllUsers(users)
     })
-    // console.log("Users inside the use effect",allUsers)
 
     fetch('/chatrooms')
     .then(resp=>resp.json())
     .then(chatrooms=>{
       setChatrooms(chatrooms)
     })
-
   },[])
-
 
   console.log(currentUser)
   console.log(allUsers)
 
   function handleSignups(newUser){
-    // debugger;
     setAllUsers({...allUsers,newUser})
   }
- 
-  console.log(currentRoom)
 
   function updateAppStateRoom(newRoom){
     // debugger;
@@ -67,10 +54,13 @@ function App({cableApp}) {
       users: newRoom.users,
       messages: newRoom.messages
     })
+    setMessages(newRoom.messages)
   }
+
   function handleUpdateCurrentUser(user){
     setCurrentUser(user)
   }
+
   function handleCurrentRoom(result){
   return {
       chatroom: result.data.attributes,
@@ -78,16 +68,11 @@ function App({cableApp}) {
       messages: result.data.attributes.messages
     }
   }
-  // const get=handleCurrentRoom()
-  // console.log(get)
 
   function getRoomData(id){
-
     fetch(`/chatrooms/${id}`)
     .then(res=>res.json())
     .then(result=>{
-      // debugger;
-      console.log("this is where i should get result for chatroom/:id",result)
       setCurrentRoom(()=>handleCurrentRoom(result))
     })
 
@@ -128,8 +113,6 @@ console.log(currentRoom)
             <Route path="/signup" element={<Signup onSignup={handleSignups}/>}/>
             <Route path="/signin" element={<Signin onSignin={handleUpdateCurrentUser}/>}/>
             <Route path="/disclaimer" element={<Disclaimer/>}/>
-            {/* <Route exact path="/chatrooms" element={<ChatroomList handleSubscr/>}/> */}
-            {/* <Route exact path="/chatrooms/:id" element={}/> */}
             {currentUser&&<Route path="/chatrooms/:id" element={
             <RoomShow 
               users={allUsers}
@@ -138,10 +121,13 @@ console.log(currentRoom)
               getRoomData={getRoomData}
               roomData={currentRoom}
               currentUser={currentUser}
+              messages={messages}
+              handleMessageUpdate={setMessages}
               />
             }/>}
             <Route exact path="/moods/:id" element={<Mood/>}></Route>
             </Routes>
+            <Footer/>
       </div>
     </Router>
   )

@@ -15,7 +15,7 @@ const[mood,setMood]=useState(null)
     },[])
     return (
      <Container >
-            {mood&&<p className="app-items" style={{color:"black"}}> {mood.mood_body}</p>}
+            {mood&&<p className="app-items" style={{color:"#5B4C81"}}> {mood.mood_body}</p>}
             <NavLink exact to={`/chatrooms/${id}`} className="app-items">Enter the chatroom</NavLink>
 
      </Container>
