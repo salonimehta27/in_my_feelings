@@ -8,7 +8,7 @@ import {Container,Form} from 'react-bootstrap'
 import './css/Chat.css'
 import {useNavigate} from 'react-router'
 
-function RoomShow({cableApp,updateApp,handleUpdateMessage,setCurrentRoom,getRoomData,messages,handleMessageUpdate,roomData,currentUser,users}) {
+function RoomShow({cableApp,updateApp,setCurrentRoom,getRoomData,messages,handleMessageUpdate,roomData,currentUser,users}) {
 console.log(roomData)
 const[newMessage,setNewMessage]=useState("")
 const[getData,setGetData]=useState(null)
@@ -79,7 +79,6 @@ function displayMessages(messages){
     )})
 }
 function handleUpdateMessage(updatedMessageObj) {
-    // debugger
   const updatedMessages = messages.map(message => {
     if (message.id === updatedMessageObj.id) {
       return updatedMessageObj

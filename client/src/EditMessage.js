@@ -6,12 +6,11 @@ function EditMessage({message,onUpdateMessage}) {
 
     function handleFormSubmit(e) {
       e.preventDefault();
-      const data =  { 
-            id:message.id,
+      const data = { 
             user_id:message.user_id,
             message_body:messageBody,
             chatroom_id: message.chatroom_id
-        }
+      }
 
     fetch(`/messages/${message.id}`, {
         method: "PATCH",
@@ -22,8 +21,7 @@ function EditMessage({message,onUpdateMessage}) {
       })
         .then(r => r.json())
         .then(data =>{
-            console.log(data)
-         onUpdateMessage(data)})
+         onUpdateMessage({...data, id:message.id})})
     }
     return (
     <form className="edit-message" onSubmit={(e)=>handleFormSubmit(e)}>

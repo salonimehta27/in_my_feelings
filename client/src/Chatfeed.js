@@ -17,7 +17,6 @@ function Chatfeed({currentUser,room,allUsers,user,message,onUpdateMessage,onDele
     }
 
     function handleUpdateMessage(updatedMessage){
-        // debugger;
         setShowEdit(false)
         onUpdateMessage(updatedMessage)
     }
