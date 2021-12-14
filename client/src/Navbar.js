@@ -1,5 +1,6 @@
 import React from 'react'
 import {NavLink}from 'react-router-dom'
+import {useNavigate} from 'react-router'
 import './css/Navbar.css'
 
 function Navbar({user,setUser}) {
@@ -9,12 +10,14 @@ function Navbar({user,setUser}) {
 // .then(r=>r.json())
 // .then(console.log)
 // console.log(user)
+const navigate=useNavigate("/")
     function handleSignout(){
         fetch("/signout",{
             method:"delete"
         }).then((r)=>{
             if(r.ok){
                 setUser(null)
+            navigate("/")
             }
         })
     }

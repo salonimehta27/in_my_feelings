@@ -2,8 +2,10 @@ import React,{useState} from 'react'
 import {AiFillDelete} from 'react-icons/ai'
 import {GiHelp} from 'react-icons/gi'
 import {AiFillEdit} from 'react-icons/ai'
-function Chatfeed({currentUser,room,allUsers,user,message,onDeleteMessage}) {
+import EditMessage from './EditMessage'
+function Chatfeed({currentUser,room,allUsers,user,message,onUpdateMessage,onDeleteMessage}) {
     const[showHelp,setShowHelp]=useState(false)
+    const[showEdit,setShowEdit]=useState(false)
     // console.log(currentUser.data.attributes.id)
     // console.log(currentUser)
     // // console.log(user)
@@ -12,6 +14,12 @@ function Chatfeed({currentUser,room,allUsers,user,message,onDeleteMessage}) {
 
     function showEditAndDelete(){
         setShowHelp(!showHelp)
+    }
+
+    function handleUpdateMessage(updatedMessage){
+        // debugger;
+        setShowEdit(false)
+        onUpdateMessage(updatedMessage)
     }
     const timestamp = new Date(message.created_at).toLocaleTimeString();
     const whichUser=()=>{
@@ -31,13 +39,13 @@ function Chatfeed({currentUser,room,allUsers,user,message,onDeleteMessage}) {
         <img style={{height:"auto",width:"30px",float:"right"}} src="https://yorktonrentals.com/wp-content/uploads/2017/06/usericon.png" alt="avatar"/>
         <p style={{color:"black", height:"auto"}}>{message.message_body}</p>
         <i style={{fontSize:"10px"}}>{timestamp}</i>
-        {whichUser()==='current-user-message'&&<GiHelp style={{float:"left"}}onClick={showEditAndDelete}></GiHelp>}
+        {whichUser()==='current-user-message'&&<GiHelp style={{float:"left"}} onClick={showEditAndDelete}></GiHelp>}
         {(showHelp&&whichUser()==='current-user-message')?
         <>
-        <AiFillEdit style={{float:"left"}}></AiFillEdit>
+        <AiFillEdit  onClick={()=>setShowEdit(!showEdit)} style={{float:"left"}}></AiFillEdit>
+        {showEdit&&<EditMessage message={message} onUpdateMessage={handleUpdateMessage}></EditMessage>}
         <AiFillDelete onClick={()=>onDeleteMessage(message.id)} style={{float:"left"}}></AiFillDelete>
         </>:null}
-
         </div>
 
       

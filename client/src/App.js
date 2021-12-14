@@ -24,6 +24,7 @@ function App({cableApp}) {
     messages: []
   })
   const[messages,setMessages]=useState(null)
+
   useEffect(()=>{
     fetch("/users")
     .then(r=>r.json())
@@ -31,11 +32,11 @@ function App({cableApp}) {
       setAllUsers(users)
     })
 
-    fetch('/chatrooms')
-    .then(resp=>resp.json())
-    .then(chatrooms=>{
-      setChatrooms(chatrooms)
-    })
+    // fetch('/chatrooms')
+    // .then(resp=>resp.json())
+    // .then(chatrooms=>{
+    //   setChatrooms(chatrooms)
+    // })
   },[])
 
   console.log(currentUser)
@@ -77,6 +78,7 @@ function App({cableApp}) {
 
   }
 console.log(currentRoom)
+
   // const postFirstMessage = (roomId) => {
   //   window.history.pushState(null, null, `/chatrooms/${roomId}`)
   //   const message = {
@@ -119,6 +121,7 @@ console.log(currentRoom)
               updateApp={updateAppStateRoom}
               getRoomData={getRoomData}
               roomData={currentRoom}
+              setCurrentRoom={setCurrentRoom}
               currentUser={currentUser}
               messages={messages}
               handleMessageUpdate={setMessages}

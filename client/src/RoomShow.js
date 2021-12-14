@@ -8,19 +8,20 @@ import {Container,Form} from 'react-bootstrap'
 import './css/Chat.css'
 import {useNavigate} from 'react-router'
 
-function RoomShow({cableApp,updateApp,getRoomData,messages,handleMessageUpdate,roomData,currentUser,users}) {
+function RoomShow({cableApp,updateApp,handleUpdateMessage,setCurrentRoom,getRoomData,messages,handleMessageUpdate,roomData,currentUser,users}) {
 console.log(roomData)
 const[newMessage,setNewMessage]=useState("")
 const[getData,setGetData]=useState(null)
 const[search,setSearch]=useState("")
 const chatroomId=window.location.href.match(/\d+$/)[0]
-const navigate=useNavigate()
+// const navigate=useNavigate()
 useEffect(()=>{
     fetch(`/chatrooms/${chatroomId}`)
     .then(resp=>resp.json())
     .then(res=>{
         setGetData(res.data.attributes.users.data)
        handleMessageUpdate(res.data.attributes.messages)
+    //    navigate("/")
     })
 },[])
 function displayUsers(data){
@@ -68,25 +69,36 @@ function whichUser(message){
 
 
 function displayMessages(messages){
-
     return messages.map(msg=>{
         const user=whichUser(msg)
         // console.log(user)
        return( msg.message_body!==null?
-        <Chatfeed key={msg.id} room={roomData} user={user} onDeleteMessage={handleDeleteClick} currentUser={currentUser} allUsers={users} message={msg}/>
+        <Chatfeed key={msg.id} room={roomData} user={user} onDeleteMessage={handleDeleteClick} onUpdateMessage={handleUpdateMessage}currentUser={currentUser} allUsers={users} message={msg}/>
         :
         <div></div>
     )})
 }
-
+function handleUpdateMessage(updatedMessageObj) {
+    // debugger
+  const updatedMessages = messages.map(message => {
+    if (message.id === updatedMessageObj.id) {
+      return updatedMessageObj
+    } else {
+      return message
+    }
+  })
+  handleMessageUpdate(updatedMessages)
+  // debugger;
+}
 function handleDeleteClick(id) {
     fetch(`/messages/${id}`, {
       method: "DELETE"
     })
     
-    const updatedMessages=messages.filter(message=>message.id!==id)
-    handleMessageUpdate(updatedMessages)
+const updatedMessages=messages.filter(message=>message.id!==id)
+handleMessageUpdate(updatedMessages)
   }
+  
 // console.log(messages)
 // console.log(roomData)
     return (

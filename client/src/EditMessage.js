@@ -1,16 +1,19 @@
 import React,{useState} from 'react'
 
-function EditMessage({message_body}) {
-    const[messageBody,setMessageBody]=useState(message_body)
+function EditMessage({message,onUpdateMessage}) {
+    // debugger;
+    const[messageBody,setMessageBody]=useState(message.message_body)
+
     function handleFormSubmit(e) {
-        e.preventDefault();
-      }
-      const data = {
-        "message": { 
-          "body": messageBody
+      e.preventDefault();
+      const data =  { 
+            id:message.id,
+            user_id:message.user_id,
+            message_body:messageBody,
+            chatroom_id: message.chatroom_id
         }
-      }
-    fetch(`/messages/${id}`, {
+
+    fetch(`/messages/${message.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json"
@@ -18,10 +21,12 @@ function EditMessage({message_body}) {
         body: JSON.stringify(data)
       })
         .then(r => r.json())
-        .then(data => onUpdateMessage(data.message))
+        .then(data =>{
+            console.log(data)
+         onUpdateMessage(data)})
     }
     return (
-    <form className="edit-message" onSubmit={handleFormSubmit}>
+    <form className="edit-message" onSubmit={(e)=>handleFormSubmit(e)}>
       <input
         type="text"
         name="body"
