@@ -24,12 +24,25 @@ before_action :authorize
     def update
     message=Message.find(params[:id])
     message.update(messages_params)
+    chatroom=message.chatroom
+    ChatroomsChannel.broadcast_to(chatroom,{
+        chatroom:chatroom,
+        users:chatroom.users,
+        messages:chatroom.messages
+    })
     render json: message
     end
 
     def destroy 
         message=Message.find_by(id: params[:id])
-        message.delete 
+       if message.delete 
+        chatroom=message.chatroom
+        ChatroomsChannel.broadcast_to(chatroom,{
+        chatroom:chatroom,
+        users:chatroom.users,
+        messages:chatroom.messages
+    }) 
+        end
         head :no_content
     end
 
