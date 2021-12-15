@@ -4,7 +4,7 @@ import {MdPassword} from 'react-icons/md'
 import {BsPersonFill,BsPersonLinesFill} from 'react-icons/bs'
 import PageSwitcher from './PageSwitcher'
 import {useNavigate} from 'react-router-dom'
-import { Container } from 'react-bootstrap'
+import { Container,Alert } from 'react-bootstrap'
 
 
 function Signup({onSignup}) {
@@ -58,10 +58,13 @@ console.log(signupForm.name)
       }
         return (
 
-            <Container style={{height:"auto"}}>
+            <Container style={{overflow:"auto",height:"120vh",width:"70%",marginTop:"5%",borderStyle:"solid",borderColor:"grey"}}>
     
             <PageSwitcher/>
             <div className="formCenter">
+              {errors.map((err)=>{
+                <Alert variant='danger'>{err}</Alert>
+              })}
             <form onSubmit={(e)=>handleSubmit(e)} className="formFields">
               <div className="formField">
                 <label className="formFieldLabel" htmlFor="name">

@@ -1,15 +1,14 @@
 import React from 'react'
-import Navbar from './Navbar'
 import {NavLink} from 'react-router-dom'
 import {FaRegSadTear,FaRegSadCry} from 'react-icons/fa'
 import {ImConfused} from 'react-icons/im'
 import {BiHappyHeartEyes} from 'react-icons/bi'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Button,Alert,Breadcrumb,Card,Container} from 'react-bootstrap'
+import {Container} from 'react-bootstrap'
 import './App.css'
 function Home() {
     return (
-           <Container>
+           <Container style={{marginTop:"5%",borderStyle:"solid",borderColor:"grey"}}>
             <p style={{fontFamily: 'Swanky and Moo Moo',fontSize:'50px',color:'#977FD7'}}>How do you feel today?</p>
                 <br/>
                <ul className="app-list">

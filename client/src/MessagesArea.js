@@ -1,8 +1,7 @@
 import React from 'react'
 import './css/Chat.css'
 import {FiSend} from 'react-icons/fi'
-import {AiFillMessage} from 'react-icons/ai'
-import {Container,Form,Button,Input} from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
 function MessagesArea({submitMessage,newMessage,onMessageInput}) {
     return (   
             <form id='chat-form' className="message-form" onSubmit={submitMessage}>

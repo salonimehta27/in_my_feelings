@@ -5,7 +5,7 @@ import {MdPassword} from 'react-icons/md'
 import {BsPersonLinesFill} from 'react-icons/bs'
 import PageSwitcher from './PageSwitcher'
 import {useNavigate} from 'react-router-dom'
-import { Container } from 'react-bootstrap'
+import { Container,Alert} from 'react-bootstrap'
 
 function Signin({onSignin}) {
 const[username,setUsername]=useState("")
@@ -50,20 +50,11 @@ const navigate=useNavigate();
         r.json().then((err)=>setErrors(err.errors))
       }
     })
-    // fetch("/me")
-    // .then((r)=>{
-    //   if(r.ok){
-    //     r.json().then(result=>(result));
-    //   }
-    //   else{
-    //     r.json().then(err=><p>{err.errors}</p>)
-    //   }
-    // })
     }
 
     return (
         
-        <Container>      
+        <Container style={{overflow:"auto",height:"120vh",width:"70%",marginTop:"5%",borderStyle:"solid",borderColor:"grey"}}>      
             <PageSwitcher/>
       <div className="formCenter">
         <form className="formFields" onSubmit={(e)=>handleSubmit(e)}>
@@ -86,6 +77,9 @@ const navigate=useNavigate();
             <label className="formFieldLabel" htmlFor="password">
             <MdPassword/>
             </label>
+            {errors.map((err)=>(
+              <Alert variant='danger' style={{width:"fit-content",textAlign:"center",alignItems:"center",border:"none",borderBlock:"none"}}>{err}</Alert>
+            ))}
             <input
               type="password"
               id="password"
@@ -96,11 +90,7 @@ const navigate=useNavigate();
               onChange={(e)=>handleChange(e)}
             />
           </div>
-          {/* <div className="formField">
-            {errors.map((err)=>(
-              <p>{err}</p>
-            ))}
-            </div> */}
+          
 
           <div className="formField">
             <button className="formFieldButton">Sign In</button>{" "}

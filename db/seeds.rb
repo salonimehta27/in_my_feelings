@@ -4,12 +4,10 @@ mood1=Mood.create(mood_name: "Happy", mood_body: "That’s awesome! we are glad 
     and share your happiness with others ")
 mood2=Mood.create(mood_name:"Sad",mood_body:"That’s okay, We all have those days when
     we feel sad, would you like to share with
-    others on how you feel? or you can try out
-    our random fun activities to do generator")
-mood3=Mood.create(mood_name:"Stressed",mood_body:"sorry to hear, you feel stressed today,
-    hoping that options we have make a   difference in your day, select one of the 
-   following")
-mood4=Mood.create(mood_name:"I feel it all", mood_body:"We understand that it can be confusing, would you like to join random chatroom?")
+    others on how you feel?")
+mood3=Mood.create(mood_name:"Stressed",mood_body:"Sorry to hear that you feel stressed today,
+   we hope that talking about it, will help a little")
+mood4=Mood.create(mood_name:"I feel it all", mood_body:"We understand that it can be confusing, would you like to join chatroom?")
 
 
 
@@ -20,5 +18,3 @@ chatroom4=Chatroom.create(room_name:"I feel it all")
 
 
 user1=User.create(name:"saloni",username:"salonimehta",password:"password123",password_confirmation:"password123",has_agreed:"true")
-
-# message1=Message.create(user_id:user1.id,chatroom_id:chatroom1.id,message_body:"Hello")

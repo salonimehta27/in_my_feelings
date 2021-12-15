@@ -10,8 +10,6 @@ import {useState,useEffect} from 'react'
 import {BrowserRouter as Router, Routes,Route} from 'react-router-dom'
 import Disclaimer from './Disclaimer';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useNavigate, useParams } from 'react-router';
-import {Button,Alert,Breadcrumb,Card} from 'react-bootstrap'
 
 
 function App({cableApp}) {
@@ -31,24 +29,17 @@ function App({cableApp}) {
     .then(users=>{
       setAllUsers(users)
     })
-
-    // fetch('/chatrooms')
-    // .then(resp=>resp.json())
-    // .then(chatrooms=>{
-    //   setChatrooms(chatrooms)
-    // })
   },[])
 
-  console.log(currentUser)
-  console.log(allUsers)
+  // console.log(currentUser)
+  // console.log(allUsers)
 
   function handleSignups(newUser){
     setAllUsers({...allUsers,newUser})
   }
 
   function updateAppStateRoom(newRoom){
-    // debugger;
-    console.log("This is the updated rooms state",newRoom)
+    //debugger;
     setCurrentRoom({...currentRoom,
       chatroom: newRoom,
       users: newRoom.users,
@@ -77,34 +68,8 @@ function App({cableApp}) {
     })
 
   }
-console.log(currentRoom)
+// console.log(currentRoom)
 
-  // const postFirstMessage = (roomId) => {
-  //   window.history.pushState(null, null, `/chatrooms/${roomId}`)
-  //   const message = {
-  //     message_body: `${currentUser.username} has joined this room!`,
-  //     user_id: currentUser.id,
-  //     chatroom_id: roomId
-  //   }
-  //   fetch("/messages", {
-  //       method: "POST",
-  //       headers: {
-  //           "Content-Type": "application/json",
-  //           Accept: "application/json"
-  //       },
-  //       body: JSON.stringify({message: message})
-  //   })
-  //   .then(resp => resp.json())
-  //   .then(result => {
-  //       console.log(result)
-  //   })
-  // }
-
-  // const subscribeToRoom = (event) => {
-  //   const room_id = event.target.id
-  //   currentUser ? (postFirstMessage(room_id)) : (alert('You must be logged in to subscribe to a room.'))
-  // }
-  // if(!user)return <Signin onSignin={setUser}/>
   return (
     <Router>
       <div className="App">
@@ -121,7 +86,6 @@ console.log(currentRoom)
               updateApp={updateAppStateRoom}
               getRoomData={getRoomData}
               roomData={currentRoom}
-              setCurrentRoom={setCurrentRoom}
               currentUser={currentUser}
               messages={messages}
               handleMessageUpdate={setMessages}

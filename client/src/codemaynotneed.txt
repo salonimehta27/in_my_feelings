@@ -45,3 +45,87 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
             </label>
 
              {/* <div className="appAside" /> */}
+
+Message controller
+
+  # def create
+    #     message=Message.new(messages_params)
+    #     chatroom= Chatroom.find(params[:chatroom_id])
+    #     # byebug
+    #     # instantiate new serializer instances manually. because we are using websockets 
+    #     # byebug
+    #     # if message.save
+    #     #     serialized_data=ActiveModelSerializers::Adapter::Json.new(
+    #     #         MessageSerializer.new(message)
+    #     #     ).serialized_json
+    #     #     byebug
+    #     #     ChatroomsChannel.broadcast_to chatroom, serialized_data
+    #     #     head :ok
+    #     # end
+    #     # byebug
+    #     if message.save
+    #         puts "successfully saved message"
+    #         # byebug
+    #             ChatroomsChannel.broadcast_to(chatroom,{
+    #             chatroom: chatroom,
+    #             users: chatroom.users,
+    #             messages:chatroom.messages
+    #         })
+    #     end
+    #     render json: message
+
+    # end
+
+Chatroom controller
+
+#  def index 
+#     chatrooms=Chatroom.all
+#     render json: chatrooms
+#   end
+#   def show
+#     chatroom=Chatroom.find(params[:id])
+#     render json:ChatroomSerializer.new(chatroom), status: :ok
+#   end
+
+  # def create 
+  #   chatroom=Chatroom.create(chatroom_params)
+  #   if chatroom.save 
+  #     serialized_data=ActiveModelSerializers::Adapter::Json.new(
+  #       ChatroomSerializer.new(chatroom)
+  #     ).serializable_hash
+  #     ActionCable.server.broadcast 'chatrooms_channel', serialized_data
+  #     head :ok
+  #   else
+  #     render json: {error:'Could not create the Chatroom'}, status: 422
+  #   end
+  #   # render json: chatroom, status: :created
+  # end
+
+  //App.js 
+
+  // const postFirstMessage = (roomId) => {
+  //   window.history.pushState(null, null, `/chatrooms/${roomId}`)
+  //   const message = {
+  //     message_body: `${currentUser.username} has joined this room!`,
+  //     user_id: currentUser.id,
+  //     chatroom_id: roomId
+  //   }
+  //   fetch("/messages", {
+  //       method: "POST",
+  //       headers: {
+  //           "Content-Type": "application/json",
+  //           Accept: "application/json"
+  //       },
+  //       body: JSON.stringify({message: message})
+  //   })
+  //   .then(resp => resp.json())
+  //   .then(result => {
+  //       console.log(result)
+  //   })
+  // }
+
+  // const subscribeToRoom = (event) => {
+  //   const room_id = event.target.id
+  //   currentUser ? (postFirstMessage(room_id)) : (alert('You must be logged in to subscribe to a room.'))
+  // }
+  // if(!user)return <Signin onSignin={setUser}/>

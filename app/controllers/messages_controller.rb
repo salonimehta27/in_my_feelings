@@ -5,12 +5,7 @@ before_action :authorize
         render json: messages
     end
 
-
     def create 
-        
-        # user=User.find(session[:user_id])
-        # message=user.messages.new(messages_params)
-        # byebug
         message=Message.new(messages_params)
         # byebug
         if message.save 
@@ -23,38 +18,8 @@ before_action :authorize
             })
         end
         # byebug
-        # render json: message
         render json: message
-
     end
-
-    # def create
-    #     message=Message.new(messages_params)
-    #     chatroom= Chatroom.find(params[:chatroom_id])
-    #     # byebug
-    #     # instantiate new serializer instances manually. because we are using websockets 
-    #     # byebug
-    #     # if message.save
-    #     #     serialized_data=ActiveModelSerializers::Adapter::Json.new(
-    #     #         MessageSerializer.new(message)
-    #     #     ).serialized_json
-    #     #     byebug
-    #     #     ChatroomsChannel.broadcast_to chatroom, serialized_data
-    #     #     head :ok
-    #     # end
-    #     # byebug
-    #     if message.save
-    #         puts "successfully saved message"
-    #         # byebug
-    #             ChatroomsChannel.broadcast_to(chatroom,{
-    #             chatroom: chatroom,
-    #             users: chatroom.users,
-    #             messages:chatroom.messages
-    #         })
-    #     end
-    #     render json: message
-
-    # end
 
     def update
     message=Message.find(params[:id])

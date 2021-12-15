@@ -1,33 +1,34 @@
 import React,{useState,useEffect} from 'react'
-import {useParams} from 'react-router'
 import Chatfeed from './Chatfeed'
 import MessagesArea from './MessagesArea'
 import RoomWebSocket from './RoomWebSocket'
 import Search from './Search'
-import {Container,Form} from 'react-bootstrap'
-import './css/Chat.css'
-import {useNavigate} from 'react-router'
 
-function RoomShow({cableApp,updateApp,setCurrentRoom,getRoomData,messages,handleMessageUpdate,roomData,currentUser,users}) {
+import './css/Chat.css'
+
+
+function RoomShow({cableApp,updateApp,getRoomData,messages,handleMessageUpdate,roomData,currentUser,users}) {
 console.log(roomData)
 const[newMessage,setNewMessage]=useState("")
 const[getData,setGetData]=useState(null)
 const[search,setSearch]=useState("")
 const chatroomId=window.location.href.match(/\d+$/)[0]
-// const navigate=useNavigate()
+
 useEffect(()=>{
     fetch(`/chatrooms/${chatroomId}`)
     .then(resp=>resp.json())
     .then(res=>{
         setGetData(res.data.attributes.users.data)
        handleMessageUpdate(res.data.attributes.messages)
-    //    navigate("/")
+
     })
 },[])
 function displayUsers(data){
     return data.map(x=>x.attributes).filter((user)=>user.username.toLowerCase().includes(search.toLowerCase())).map((user)=>{
        return <div style={{overflowY:"scroll",scrollBehavior:"smooth"}}>
-        <img style={{height:"auto",width:"30px",float:"left"}} src="https://yorktonrentals.com/wp-content/uploads/2017/06/usericon.png" alt="avatar"/>
+        <img style={{height:"auto",width:"30px",float:"left"}}
+         src="https://yorktonrentals.com/wp-content/uploads/2017/06/usericon.png"
+         alt="avatar"/>
         <h6 style={{color:"white",listStyle:"none",overflowY:"scroll",float:"left"}}>@{user.username}</h6>
        </div>
    })
@@ -45,7 +46,7 @@ const message={
 function submitMessage(e){
     // debugger;
     e.preventDefault();
-    // setNewMessage("");
+    setNewMessage("");
     fetch("/messages",{
         method:"POST",
         headers: {
@@ -58,7 +59,7 @@ function submitMessage(e){
     .then(()=>{
         let messageDiv=document.getElementById('messages')
         messageDiv.scrollTop=messageDiv.scrollHeight
-        setNewMessage("")
+        // setNewMessage("")
     } )
 }
 function whichUser(message){
@@ -73,7 +74,13 @@ function displayMessages(messages){
         const user=whichUser(msg)
         // console.log(user)
        return( msg.message_body!==null?
-        <Chatfeed key={msg.id} room={roomData} user={user} onDeleteMessage={handleDeleteClick} onUpdateMessage={handleUpdateMessage}currentUser={currentUser} allUsers={users} message={msg}/>
+        <Chatfeed key={msg.id}
+         room={roomData} user={user} 
+         onDeleteMessage={handleDeleteClick} 
+         onUpdateMessage={handleUpdateMessage}
+         currentUser={currentUser} 
+         allUsers={users} 
+         message={msg}/>
         :
         <div></div>
     )})
@@ -87,8 +94,8 @@ function handleUpdateMessage(updatedMessageObj) {
     }
   })
   handleMessageUpdate(updatedMessages)
-  // debugger;
 }
+
 function handleDeleteClick(id) {
     fetch(`/messages/${id}`, {
       method: "DELETE"
@@ -98,8 +105,6 @@ const updatedMessages=messages.filter(message=>message.id!==id)
 handleMessageUpdate(updatedMessages)
   }
   
-// console.log(messages)
-// console.log(roomData)
     return (
             <div className="chat-container">
               <div className="users">
@@ -126,7 +131,11 @@ handleMessageUpdate(updatedMessages)
                   <br></br>
                   <br></br>
                   <br></br>
-                <MessagesArea submitMessage={submitMessage} newMessage={newMessage} onMessageInput={handleMessageInput}/>
+                <MessagesArea 
+                submitMessage={submitMessage} 
+                newMessage={newMessage} 
+                onMessageInput={handleMessageInput}
+                />
                </div>
             <RoomWebSocket
                     cableApp={cableApp}

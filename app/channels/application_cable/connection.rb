@@ -1,25 +1,21 @@
 
 #For every WebSocket accepted by the server, a connection object is instantiated.
 #sole job is to authenticate and authorize the current user
+#Connections are instances of ApplicationCable::Connection, which extends ActionCable::Connection::Base.
+# indentified_by(*indentifiers) 
+# Mark a key as being the connection identifier index that can be used
+# to find the specific connection again later.
+# https://api.rubyonrails.org/v6.1.4/classes/ActionCable/Connection/Identification/ClassMethods.html#method-i-identified_by
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
-    #anything after this line is my own code in this prewritten code
-    #Connections are instances of ApplicationCable::Connection, which extends ActionCable::Connection::Base.
-  # rescue_from StandardError, with: :report_error
-  # indentified_by(*indentifiers) 
-  # Mark a key as being the connection identifier index that can be used
-  # to finf the specific connection again later.
-  # https://api.rubyonrails.org/v6.1.4/classes/ActionCable/Connection/Identification/ClassMethods.html#method-i-identified_by
     identified_by :current_user
 
     def connect 
       self.current_user=find_verified_user
     end
     
-
-
     private
-    # what is cookies.encrypted? # where did the reject_unauthorized_connection come from
+   
     def find_verified_user
       # byebug
       if verified_user= User.find(cookies.encrypted['_session_id']['user_id'])
@@ -35,12 +31,5 @@ module ApplicationCable
       end
 
     end
-    # this code is questionable
-    # No code or such method found on the rails app 
-    # so this might will just get deleted along with the rescue_from in this file
-
-    # def report_error e
-    #   SomeExternalBugtrackingService.notify(e)
-    # end
   end
 end

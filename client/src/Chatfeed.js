@@ -6,12 +6,7 @@ import EditMessage from './EditMessage'
 function Chatfeed({currentUser,room,allUsers,user,message,onUpdateMessage,onDeleteMessage}) {
     const[showHelp,setShowHelp]=useState(false)
     const[showEdit,setShowEdit]=useState(false)
-    // console.log(currentUser.data.attributes.id)
-    // console.log(currentUser)
-    // // console.log(user)
     
-    console.log(message)
-
     function showEditAndDelete(){
         setShowHelp(!showHelp)
     }
@@ -32,12 +27,11 @@ function Chatfeed({currentUser,room,allUsers,user,message,onUpdateMessage,onDele
     }
     return (
         
-        <div id="chat-message" className={whichUser()}>
-            
+        <div id="chat-message" className={whichUser()}>    
         {user!==undefined&&<i style={{float:"left",fontSize:"8px"}}>{user.username}</i>}
         <img style={{height:"auto",width:"30px",float:"right"}} src="https://yorktonrentals.com/wp-content/uploads/2017/06/usericon.png" alt="avatar"/>
         <p style={{color:"black", height:"auto"}}>{message.message_body}</p>
-        <i style={{fontSize:"10px"}}>{timestamp}</i>
+        {timestamp!=="Invalid Date"?<i style={{fontSize:"10px"}}>{timestamp}</i>:<i style={{fontSize:"10px"}}>Edited</i>}
         {whichUser()==='current-user-message'&&<GiHelp style={{float:"left"}} onClick={showEditAndDelete}></GiHelp>}
         {(showHelp&&whichUser()==='current-user-message')?
         <>

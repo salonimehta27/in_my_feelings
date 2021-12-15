@@ -4,7 +4,6 @@ import {NavLink} from 'react-router-dom'
 function PageSwitcher() {
     return (
        <>
-                 {/* <div className="appAside" /> */}
             <div className="pageSwitcher">
               <NavLink
                 exact to="/signin"
