@@ -35,9 +35,10 @@ function Chatfeed({currentUser,room,allUsers,user,message,onUpdateMessage,onDele
         {whichUser()==='current-user-message'&&<GiHelp style={{float:"left"}} onClick={showEditAndDelete}></GiHelp>}
         {(showHelp&&whichUser()==='current-user-message')?
         <>
+        <AiFillDelete onClick={()=>onDeleteMessage(message.id)} style={{float:"left"}}></AiFillDelete>
         <AiFillEdit  onClick={()=>setShowEdit(!showEdit)} style={{float:"left"}}></AiFillEdit>
         {showEdit&&<EditMessage message={message} onUpdateMessage={handleUpdateMessage}></EditMessage>}
-        <AiFillDelete onClick={()=>onDeleteMessage(message.id)} style={{float:"left"}}></AiFillDelete>
+        
         </>:null}
         </div>
 

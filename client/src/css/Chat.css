@@ -93,6 +93,26 @@
 	box-shadow: 1px 1px #888888;
 	color: #0093e9;
 }
+form.edit-message {
+	display: flex;
+	flex-direction: column;
+}
+
+form.edit-message input[type="text"] {
+	margin-top: 0.5rem;
+	border: 1px solid transparent;
+	background-color: var(--bg-color-3);
+	background-color: #f8efef;
+}
+
+form.edit-message input[type="text"]:focus {
+	border: 1px solid var(--bg-color-2);
+}
+
+.edit-button {
+	margin-top: 0.5rem;
+	width: 50px;
+}
 /* #chat-form {
 	text-align: "center";
 	display: flex;

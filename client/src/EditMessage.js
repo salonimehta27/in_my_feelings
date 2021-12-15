@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
-
+import { Button} from 'react-bootstrap'
+import {HiOutlineSave} from 'react-icons/hi'
 function EditMessage({message,onUpdateMessage}) {
     // debugger;
     const[messageBody,setMessageBody]=useState(message.message_body)
@@ -32,7 +33,7 @@ function EditMessage({message,onUpdateMessage}) {
         value={messageBody}
         onChange={(e) => setMessageBody(e.target.value)}
       />
-      <input type="submit" value="Save" />
+     <Button className="edit-message" style={{marginTop:"2px"}} type="Submit"><HiOutlineSave/></Button>
     </form>
     )
 }
