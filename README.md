@@ -34,5 +34,4 @@ You can use the following commands to run the application:
 
 ## Roadmap
 
-- Create a feature to add multiple Chatrooms and broadcast them
 - Use Action Mailer for Email verification
