@@ -6,7 +6,7 @@ This app has different chatrooms which provide real time communication using Act
 
 ![projectdemo](Images/gif-2.gif)
 
-## => [Blog Post Explaining the Concept of Action Cable and Websockets](https://salonimehta27.medium.com/action-cable-chatapp-with-react-hooks-69d5d55c7475)
+## => [Blog Post explaining the concept and set up of Action Cable and Websockets](https://salonimehta27.medium.com/action-cable-chatapp-with-react-hooks-69d5d55c7475)
 
 ## => [Video Demo on Youtube](https://www.youtube.com/watch?v=NwQEZXnVXJ8&t=1s)
 
