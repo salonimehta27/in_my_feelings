@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import {Link,NavLink} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import './css/Signin.css'
 import {MdPassword} from 'react-icons/md'
 import {BsPersonLinesFill} from 'react-icons/bs'
@@ -53,7 +53,8 @@ const navigate=useNavigate();
     }
 
     return (
-        
+        <>
+        {isLoading?<h2>Loading...</h2>:null}
         <Container style={{overflow:"auto",height:"120vh",width:"70%",marginTop:"5%",borderStyle:"solid",borderColor:"grey"}}>      
             <PageSwitcher/>
       <div className="formCenter">
@@ -101,7 +102,7 @@ const navigate=useNavigate();
         </form>
       </div>
       </Container>  
-
+      </>
     )
 }
 

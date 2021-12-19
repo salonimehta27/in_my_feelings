@@ -6,7 +6,6 @@ class ChatroomsChannel < ApplicationCable::Channel
   end
 
   def received data
-    # byebug
    ChatroomsChannel.broadcast_to(@chatroom,{chatroom:@chatroom, users: @chatroom.users, messages:@chatroom.messages})
   end
   

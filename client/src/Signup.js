@@ -75,6 +75,7 @@ console.log(signupForm.name)
                   id="name"
                   className="formFieldInput"
                   placeholder="Enter first name"
+                  required
                   name="name"
                   value={signupForm.name}
                   onChange={(e)=>handleChange(e)}
@@ -90,6 +91,7 @@ console.log(signupForm.name)
                   className="formFieldInput"
                   placeholder="Enter username"
                   name="username"
+                  required
                   value={signupForm.username}
                   onChange={(e)=>handleChange(e)}
                 />
@@ -103,6 +105,7 @@ console.log(signupForm.name)
                   id="password"
                   className="formFieldInput"
                   placeholder="Enter password"
+                  required
                   name="password"
                   value={signupForm.password}
                   onChange={(e)=>handleChange(e)}
@@ -118,6 +121,7 @@ console.log(signupForm.name)
                   className="formFieldInput"
                   placeholder="Confirm password"
                   name="passwordConfirmation"
+                  required
                   value={signupForm.passwordConfirmation}
                   onChange={(e)=>handleChange(e)}
                 />
@@ -129,6 +133,7 @@ console.log(signupForm.name)
                     className="formFieldCheckbox"
                     type="checkbox"
                     name="hasAgreed"
+                    required
                     checked={signupForm.hasAgreed}
                     onChange={(e)=>handleChange(e)}
                   />{" "}

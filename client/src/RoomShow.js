@@ -8,7 +8,7 @@ import './css/Chat.css'
 
 
 function RoomShow({cableApp,updateApp,getRoomData,messages,handleMessageUpdate,roomData,currentUser,users}) {
-console.log(roomData)
+
 const[newMessage,setNewMessage]=useState("")
 const[getData,setGetData]=useState(null)
 const[search,setSearch]=useState("")
@@ -34,7 +34,6 @@ function displayUsers(data){
    })
 }
 
-console.log(getData)
 function handleMessageInput(event){
     setNewMessage(event.target.value)
 }

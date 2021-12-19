@@ -15,7 +15,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 function App({cableApp}) {
   const[currentUser,setCurrentUser]=useState(null)
   const[allUsers,setAllUsers]=useState([])
-  const[chatrooms,setChatrooms]=useState([])
   const[currentRoom,setCurrentRoom]=useState({
     chatroom:{},
     users: [],
@@ -31,15 +30,12 @@ function App({cableApp}) {
     })
   },[])
 
-  // console.log(currentUser)
-  // console.log(allUsers)
 
   function handleSignups(newUser){
     setAllUsers({...allUsers,newUser})
   }
 
   function updateAppStateRoom(newRoom){
-    //debugger;
     setCurrentRoom({...currentRoom,
       chatroom: newRoom,
       users: newRoom.users,
@@ -68,7 +64,6 @@ function App({cableApp}) {
     })
 
   }
-// console.log(currentRoom)
 
   return (
     <Router>

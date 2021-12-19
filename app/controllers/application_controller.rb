@@ -11,7 +11,6 @@ def current_user
  end
 end
 
-
 private 
 
 def render_response_not_found
