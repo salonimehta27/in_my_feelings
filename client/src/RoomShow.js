@@ -22,7 +22,7 @@ useEffect(()=>{
        handleMessageUpdate(res.data.attributes.messages)
 
     })
-},[chatroomId,handleMessageUpdate])
+},[])
 function displayUsers(data){
     return data.map(x=>x.attributes).filter((user)=>user.username.toLowerCase().includes(search.toLowerCase())).map((user)=>{
        return <div style={{overflowY:"scroll",scrollBehavior:"smooth"}} key={user.id}>
