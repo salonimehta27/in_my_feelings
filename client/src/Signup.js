@@ -62,9 +62,7 @@ console.log(signupForm.name)
     
             <PageSwitcher/>
             <div className="formCenter">
-              {errors.map((err)=>{
-                <Alert variant='danger'>{err}</Alert>
-              })}
+              {errors.map((err)=><Alert variant='danger'>{err}</Alert>)}
             <form onSubmit={(e)=>handleSubmit(e)} className="formFields">
               <div className="formField">
                 <label className="formFieldLabel" htmlFor="name">

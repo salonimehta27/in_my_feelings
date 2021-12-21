@@ -22,10 +22,10 @@ useEffect(()=>{
        handleMessageUpdate(res.data.attributes.messages)
 
     })
-},[])
+},[chatroomId,handleMessageUpdate])
 function displayUsers(data){
     return data.map(x=>x.attributes).filter((user)=>user.username.toLowerCase().includes(search.toLowerCase())).map((user)=>{
-       return <div style={{overflowY:"scroll",scrollBehavior:"smooth"}}>
+       return <div style={{overflowY:"scroll",scrollBehavior:"smooth"}} key={user.id}>
         <img style={{height:"auto",width:"30px",float:"left"}}
          src="https://yorktonrentals.com/wp-content/uploads/2017/06/usericon.png"
          alt="avatar"/>

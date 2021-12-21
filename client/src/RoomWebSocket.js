@@ -13,7 +13,7 @@ function RoomWebSocket(props) {
               props.updateApp(updatedRoom)
             }
         })
-    },[])
+    },[props])
 
     return (
         <div>

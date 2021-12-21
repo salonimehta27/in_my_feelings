@@ -1,18 +1,17 @@
 import React,{useEffect,useState} from 'react'
-import {useParams,useNavigate} from 'react-router'
+import {useParams} from 'react-router'
 import {Container} from 'react-bootstrap'
 import {NavLink,Link} from "react-router-dom"
+
 function Mood({currentUser}) {
-    const{id}=useParams()
-    const navigate=useNavigate()
-    // console.log(id)
+const{id}=useParams()
 const[mood,setMood]=useState(null)
     useEffect(()=>{
 
         fetch(`/moods/${id}`)
         .then(r=>r.json())
         .then(res=>setMood(res))
-    },[])
+    },[id])
     return (
      <Container style={{marginTop:"5%",borderStyle:"solid",borderColor:"grey"}}>
             {mood&&<p className="app-items" style={{color:"#5B4C81"}}> {mood.mood_body}</p>}
