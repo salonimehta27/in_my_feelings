@@ -70,7 +70,7 @@ function App({cableApp}) {
       <div className="App">
         <Navbar user={currentUser} setUser={setCurrentUser}/>
             <Routes>
-            <Route exact path="/" element={<Home/>}/>
+            <Route exact path="/" element={<Home></Home>} />
             <Route path="/signup" element={<Signup onSignup={handleSignups}/>}/>
             <Route path="/signin" element={<Signin onSignin={handleUpdateCurrentUser}/>}/>
             <Route path="/disclaimer" element={<Disclaimer/>}/>

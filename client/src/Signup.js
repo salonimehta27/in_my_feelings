@@ -8,7 +8,8 @@ import { Container,Alert } from 'react-bootstrap'
 
 
 function Signup({onSignup}) {
-  const navigate=useNavigate()
+
+const navigate=useNavigate()
 const[errors,setErrors]=useState([])
 
 const signupObj={
@@ -19,7 +20,7 @@ const signupObj={
     hasAgreed: false
 }
 const[signupForm,setSignupForm]=useState(signupObj)
-console.log(signupForm.name)
+
     function handleChange(event) {
         let target = event.target;
         let value = target.type === "checkbox" ? target.checked : target.value;
@@ -47,15 +48,18 @@ console.log(signupForm.name)
           {
             r.json().then(user=>{
               onSignup(user)
-              setSignupForm(signupObj)
               navigate('/signin')
+              setSignupForm(signupObj)
             })
           }
           else{
-            r.json().then((err)=>setErrors(err.errors))
+            r.json().then((err)=>{
+              console.log(err)
+              setErrors(err.errors)})
           }
+          
         })
-      }
+    }
         return (
 
             <Container style={{overflow:"auto",height:"120vh",width:"70%",marginTop:"5%",borderStyle:"solid",borderColor:"grey"}}>
@@ -73,7 +77,6 @@ console.log(signupForm.name)
                   id="name"
                   className="formFieldInput"
                   placeholder="Enter first name"
-                  required
                   name="name"
                   value={signupForm.name}
                   onChange={(e)=>handleChange(e)}
