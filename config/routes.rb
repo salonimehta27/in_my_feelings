@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
-  
+
   resources :moods, only: [:index,:show]
   resources :chatrooms, only:[:index,:show]
   resources :messages, only:[:index,:create,:update,:destroy]
   resources :users, only:[:index]
-
+  
+  get "/me", to: "users#show" 
   post '/signup', to: 'users#create'
   post '/signin', to: 'sessions#create'
   delete '/signout', to: 'sessions#destroy'

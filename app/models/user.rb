@@ -4,5 +4,6 @@ class User < ApplicationRecord
     validates :name, :username,:has_agreed, presence: :true
     validates_uniqueness_of :username
     has_secure_password
+
 end
  

@@ -23,6 +23,14 @@ function App({cableApp}) {
   const[messages,setMessages]=useState(null)
 
   useEffect(()=>{
+
+    fetch("/me")
+    .then((response) => {
+      if (response.ok) {
+        response.json().then((user) => setCurrentUser(user));
+      }
+    });
+    
     fetch("/users")
     .then(r=>r.json())
     .then(users=>{
