@@ -18,7 +18,6 @@ useEffect(()=>{
     fetch(`/chatrooms/${chatroomId}`)
     .then(resp=>resp.json())
     .then(res=>{
-      // console.log(res)
         setGetData(res.data.attributes.users.data)
        handleMessageUpdate(res.data.attributes.messages)
 
@@ -59,7 +58,7 @@ function submitMessage(e){
     .then(()=>{
         let messageDiv=document.getElementById('messages')
         messageDiv.scrollTop=messageDiv.scrollHeight
-        // setNewMessage("")
+        
     } )
 }
 function whichUser(message){
