@@ -95,7 +95,7 @@ function App({cableApp}) {
               />
             }/>
               }
-            <Route exact path="/moods/:id" element={<Mood allUsers={allUsers} currentUser={currentUser}/>}></Route>
+            <Route exact path="/moods/:id" element={<Mood currentUser={currentUser}/>}></Route>
             </Routes>
             <Footer/>
       </div>
