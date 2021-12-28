@@ -8,7 +8,6 @@ before_action :authorize
 
 private 
 
-end
 def render_response_not_found
   render json: {errors: "Not Found"}, status: :not_found
 end
