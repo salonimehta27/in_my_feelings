@@ -7,9 +7,6 @@ class MoodsController < ApplicationController
 
  def show
   mood=Mood.find(params[:id])
-  respond_to do |format|
-    format.html
-    format.json { render json: mood }
-  end
+  render json: mood, status: :ok
  end
 end
