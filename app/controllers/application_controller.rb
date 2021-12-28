@@ -8,13 +8,6 @@ before_action :authorize
 
 private 
 
-def respond
-  respond_to do |format|
-    format.html
-    format.json
-  end
-end
-
 end
 def render_response_not_found
   render json: {errors: "Not Found"}, status: :not_found

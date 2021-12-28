@@ -9,8 +9,7 @@ class MoodsController < ApplicationController
   mood=Mood.find(params[:id])
   respond_to do |format|
     format.html
-    format.json
+    format.json {render :json=>mood.to_json}
   end
-  render json: mood, status: :ok
  end
 end
