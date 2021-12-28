@@ -82,7 +82,7 @@ function App({cableApp}) {
             <Route path="/signup" element={<Signup onSignup={handleSignups}/>}/>
             <Route path="/signin" element={<Signin onSignin={handleUpdateCurrentUser}/>}/>
             <Route path="/disclaimer" element={<Disclaimer/>}/>
-            {currentUser&&<Route path={currentUser?"/chatrooms/:id":"/signin"} element={
+            {currentUser&&<Route path={currentUser?"/api/chatrooms/:id":"/signin"} element={
             <RoomShow 
               users={allUsers}
               cableApp={cableApp}
@@ -95,7 +95,7 @@ function App({cableApp}) {
               />
             }/>
               }
-            <Route exact path="/moods/:id" element={<Mood currentUser={currentUser}/>}></Route>
+            <Route exact path="/api/moods/:id" element={<Mood currentUser={currentUser}/>}></Route>
             </Routes>
             <Footer/>
       </div>
