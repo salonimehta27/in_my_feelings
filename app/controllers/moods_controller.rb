@@ -2,10 +2,7 @@ class MoodsController < ApplicationController
  skip_before_action :authorize
  def index 
   moods=Mood.all
-  respond_to do |format|
-    format.html
-    format.json
-  end
+  render json: moods
  end
 
  def show
