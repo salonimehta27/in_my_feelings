@@ -8,7 +8,7 @@ const{id}=useParams()
 const[mood,setMood]=useState(null)
     useEffect(()=>{
 
-        fetch(`/moods/${id}`)
+        fetch(`https://in-my-f33lings.herokuapp.com/moods/${id}`)
         .then(r=>r.json())
         .then(res=>setMood(res))
     },[id])

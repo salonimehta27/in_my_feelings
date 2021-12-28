@@ -31,7 +31,7 @@ function App({cableApp}) {
       }
     });
     
-    fetch("/users")
+    fetch("/https://in-my-f33lings.herokuapp.com/users")
     .then(r=>r.json())
     .then(users=>{
       setAllUsers(users)
@@ -65,7 +65,7 @@ function App({cableApp}) {
   }
 
   function getRoomData(id){
-    fetch(`/chatrooms/${id}`)
+    fetch(`https://in-my-f33lings.herokuapp.com/chatrooms/${id}`)
     .then(res=>res.json())
     .then(result=>{
       setCurrentRoom(()=>handleCurrentRoom(result))

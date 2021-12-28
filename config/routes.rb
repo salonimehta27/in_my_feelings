@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
-  # resources :moods, only: [:index,:show]
-  get "/moods", to: "moods#index"
-  get "/moods/:id", to: "moods#show"
-
+  resources :moods, only: [:index,:show]
   resources :chatrooms, only:[:index,:show]
   resources :messages, only:[:index,:create,:update,:destroy]
   resources :users, only:[:index]
