@@ -15,7 +15,7 @@ const[search,setSearch]=useState("")
 const chatroomId=window.location.href.match(/\d+$/)[0]
 
 useEffect(()=>{
-    fetch(`https://in-my-f33lings.herokuapp.com/chatrooms/${chatroomId}`)
+    fetch(`/chatrooms/${chatroomId}`)
     .then(resp=>resp.json())
     .then(res=>{
         setGetData(res.data.attributes.users.data)
@@ -46,7 +46,7 @@ function submitMessage(e){
     // debugger;
     e.preventDefault();
     setNewMessage("");
-    fetch("https://in-my-f33lings.herokuapp.com/messages",{
+    fetch("/messages",{
         method:"POST",
         headers: {
             "Content-Type": "application/json",
@@ -96,7 +96,7 @@ function handleUpdateMessage(updatedMessageObj) {
 }
 
 function handleDeleteClick(id) {
-    fetch(`https://in-my-f33lings.herokuapp.com/messages/${id}`, {
+    fetch(`/messages/${id}`, {
       method: "DELETE"
     })
     

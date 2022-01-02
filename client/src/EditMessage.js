@@ -13,7 +13,7 @@ function EditMessage({message,onUpdateMessage}) {
             chatroom_id: message.chatroom_id
       }
 
-    fetch(`https://in-my-f33lings.herokuapp.com/messages/${message.id}`, {
+    fetch(`/messages/${message.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json"
