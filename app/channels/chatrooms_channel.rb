@@ -5,10 +5,10 @@ class ChatroomsChannel < ApplicationCable::Channel
     stream_for chatroom
   end
 
-  def received data
-   ChatroomsChannel.broadcast_to(chatroom,{chatroom:chatroom, users: chatroom.users, messages:chatroom.messages})
+  def received(data)
+    ChatroomsChannel.broadcast_to(chatroom, { chatroom: chatroom, users: chatroom.users, messages: chatroom.messages })
   end
-  
+
   def unsubscribed
     stop_all_streams
   end
